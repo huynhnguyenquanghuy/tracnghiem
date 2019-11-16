@@ -1,23 +1,25 @@
 -- phpMyAdmin SQL Dump
--- version 4.1.14
--- http://www.phpmyadmin.net
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Mar 27, 2017 at 04:34 PM
--- Server version: 5.6.17
--- PHP Version: 5.5.12
+-- Host: 127.0.0.1:3306
+-- Generation Time: Nov 16, 2019 at 01:48 PM
+-- Server version: 5.7.26
+-- PHP Version: 7.3.5
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `exam_system`
+-- Database: `exam`
 --
 
 -- --------------------------------------------------------
@@ -26,8 +28,10 @@ SET time_zone = "+00:00";
 -- Table structure for table `exam`
 --
 
+DROP TABLE IF EXISTS `exam`;
 CREATE TABLE IF NOT EXISTS `exam` (
   `question_id` varchar(255) NOT NULL,
+  `sub` longtext NOT NULL,
   `question` longtext NOT NULL,
   `option1` varchar(255) NOT NULL,
   `option2` varchar(255) NOT NULL,
@@ -41,107 +45,107 @@ CREATE TABLE IF NOT EXISTS `exam` (
 -- Dumping data for table `exam`
 --
 
-INSERT INTO `exam` (`question_id`, `question`, `option1`, `option2`, `option3`, `option4`, `answer`) VALUES
-('QUES001', 'From what location are the 1st computer instructions available on boot up?', 'ROM BIOS', 'CPU', 'boot.ini', 'CONFIG.SYS', 'ROM BIOS'),
-('QUES002', 'What could cause a fixed disk error', 'No-CD installed', 'bad ram', 'slow processor', 'Incorrect CMOS settings', 'Incorrect CMOS settings'),
-('QUES003', 'Missing slot covers on a computer can cause?', 'over heat', 'power surges', 'EMI', 'incomplete path for ESD', 'over heat'),
-('QUES004', 'When installing PCI NICS you can check the IRQ availability by looking at', 'dip switches', 'CONFIG.SYS', 'jumper settings', 'motherboard BIOS', 'motherboard BIOS'),
-('QUES005', 'With respect to a network interface card, the term 10/100 refers to', 'protocol speed', 'a fiber speed', 'megabits per seconds', 'minimum and maximum server speed', 'megabits per seconds'),
-('QUES006', 'Which Motherboard form factor uses one 20 pin connector', 'ATX', 'AT', 'BABY AT', 'All of the above', 'ATX'),
-('QUES007', 'A hard disk is divided into tracks which are further subdivided into', 'clusters', 'sectors', 'vectors', 'heads', 'sectors'),
-('QUES008', 'A wrist grounding strap contains which of the following', 'Surge protector', 'Capacitor', 'Voltmeter', 'Resistor', 'Resistor'),
-('QUES009', 'Which standard govern parallel communications?', 'RS232', 'RS-232a', 'CAT 5', 'IEEE 1284', 'IEEE 1284'),
-('QUES010', 'In laser printer technology, what happens during the conditioning stage?', 'The corona wire places a uniform positive charge on the paper', 'A uniform negative charge is placed on the photosensitive drum', 'A uniform negative charge is placed on the toner', 'All of the above', 'A uniform negative charge is placed on the photosensitive drum'),
-('QUES011', 'What product is used to clean smudged keys on a keyboard?', 'TMC solvent', 'Silicone spray', 'Denatured alcohol', 'All-purpose cleaner', 'All-purpose cleaner'),
-('QUES012', 'ESD would cause the most damage to which component?', 'Power supply', 'Expansion board', 'Monitor', 'Keyboard', 'Expansion board'),
-('QUES013', 'To view any currently running Terminate Stay Resident (TSR''s) programs you could type', 'Memory', 'MEM', 'SYS /M', 'Memmaker', 'MEM'),
-('QUES014', 'Which type of system board is the MOST likely candidate for processor upgrading if you want maximum performance and future compatibility?', 'ML', 'PCI', 'ISA', 'EISA', 'PCI'),
-('QUES015', 'Suppose that you have a the maintenance package identifies several possible field replaceable units (FRUs) that will resolve the problem. What should you do after turning the power off?', 'Replace the indicated parts, one at a time in the recommended sequence, until the problem is resolved; return unused FRUs to stock', 'Replace all of the indicated FRUs at once and return the machine to the customer if the problem is resolved', 'Follow the same procedure as in ays replace the system board first if it is on the list of possible FRUs If multiple FRUs are indicated, then software is the most likely source of the problem', 'None of the above', 'Replace the indicated parts, one at a time in the recommended sequence, until the problem is resolved; return unused FRUs to stock'),
-('QUES016', 'Most PCs give a single beep on bootup to indicate they are ok hardware wise. You boot your PC and don''t get a beep. What should you check first?', 'system board', 'RAM', 'microprocessor', 'speaker', 'speaker'),
-('QUES017', 'Which peripheral port provides the FASTEST throughput to laser printers?', 'RS-232', 'SCSI', 'Parallel', 'Serial', 'Parallel'),
-('QUES018', 'The mouse pointer moves erratically, what is the possible cause? The mouse', 'ball is dirty', 'is not connected', 'driver is not installed properly', 'has an incorrect IRQ setting', 'ball is dirty'),
-('QUES019', 'Voltage is measured', 'in parallel', 'in series', 'after breaking the circuit', 'after checking resistance', 'in parallel'),
-('QUES020', 'Your customer tells you the print quality of their dot matrix printer is light then dark. Which of the following could cause the problem', 'Paper slippage', 'Improper ribbon advancement', 'Paper thickness', 'Head position', 'Improper ribbon advancement'),
-('QUES021', 'The 34-pin connection on an I/O card is for?', 'Floppy drive', 'SCSI drive', 'IDE drive', 'Zip drive', 'Floppy drive'),
-('QUES022', 'What beep codes could indicate a system board or power supply failure?', 'steady short beep', 'no beep', 'one long continuous beep tone', 'All of the above', 'All of the above'),
-('QUES023', 'After doing a low-level format, what would be the next step in configuring the hard drive in a system?', 'Format DOS partition', 'Install operating system', 'Configure DMA channel and back-up interrupt', 'Partition had disk', 'Format DOS partition'),
-('QUES024', 'Resistance is measured in ?', 'Volts', 'Amps', 'Watts', 'Ohms', 'Ohms'),
-('QUES025', 'When installing a SCSI CD-ROM drive, you must set the CD-ROM SCSI adapter to', 'B0007', 'An unused SCSI address', 'The same address as the SCSI device before the CD-ROM', 'SCSI ID=1', 'An unused SCSI address'),
-('QUES026', 'Pick the correct choice for the 80386SXCPU', '16 bit word size, 16 bit data path', '32 bit word size, 16 bit data path', '8 bit word size, 32 bit data path', '32 bit word size, 8 bit data path', '32 bit word size, 16 bit data path'),
-('QUES027', 'In Inkjet technology the droplets of ink are deflected by?', 'multi directional nozzles', 'electronically charged plates', 'high pressure plates', 'electro static absorbtion', 'multi directional nozzles'),
-('QUES028', 'What tool is used to test serial and parallel ports?', 'high volt probe', 'cable scanner', 'loop backs (wrap plugs)', 'sniffer', 'loop backs (wrap plugs)'),
-('QUES029', 'What voltage does a Pentium system use?', '+12 volts', '+ 5 volts', '+ 8 volts', '+3.3 volts', '+3.3 volts'),
-('QUES030', 'A numeric error code check: A 17xx indicates a problem with:', 'CMOS', 'ROM BIOS', 'DMA controller', 'hard drive or controller', 'hard drive or controller'),
-('QUES031', 'Which provides the fastest access to large video files?', 'Optical drives', 'IDE hard drives', 'SCSI hard drives', 'EIDE hard drives', 'SCSI hard drives'),
-('QUES032', 'A 25-pin female connector on the back of your computer will typically be', 'Serial port 1', 'A parallel port', 'Docking', 'COM2 port', 'A parallel port'),
-('QUES033', 'On the PC side, the printer port is a', '25 pin female serial connector', '15 pin female parallel connector', '25 pin male serial connector', '25 pin female parallel connector', '25 pin female parallel connector'),
-('QUES034', 'You just installed a new IDE hard drive, but your system BIOS will not recognize the new drive, what should you check first', 'cable sequence', 'jumpers on the hard drive', 'drivers that need to be loaded', 'hard drive manufacturer web site information', 'jumpers on the hard drive'),
-('QUES035', 'During boot-up, the memory test', 'Is a superfluous step that should be ignored', 'Checks and verifies that contiguous memory is installed', 'Is an operational error', 'Displays what memory is installed, but nothing else', 'Checks and verifies that contiguous memory is installed'),
-('QUES036', 'What is the best ground for a conductive work bench?', 'AC outlet', 'Ground to bend', 'To another device', 'Chassis ground', 'AC outlet'),
-('QUES037', 'What is the first thing you could do to check for damage to a printer after receiving it?', 'Run MSD diagnostics', 'Attach it to a PC and print something', 'Check the cables', 'Unbox it and examine it for physical damage', 'Unbox it and examine it for physical damage'),
-('QUES038', 'You have a system that periodically locks up. You have ruled out software, and now suspect that it is hardware. What should you do first that could help you narrow it down to the component at fault?', 'rotate the RAM', 'replace the RAM', 'replace the level 2 cache SIMM', 'disable the CPU cache in CMOS', 'disable the CPU cache in CMOS'),
-('QUES039', 'What''s the best way to protect your hard drive data?', 'regular backups', 'periodically defrag it', 'run chkdsk at least once a week', 'run scandisk at least once a week', 'regular backups'),
-('QUES040', 'Match the device driver HIMEM.SYS to its operation.', 'Supports (ANSI) terminal emulation', 'Manages the use of extended memory', 'Uses expanded memory on a 80386 processor', 'Supports code page switching', 'Manages the use of extended memory'),
-('QUES041', 'The digital multimeter is set for DC, Ohm and 20k. You will read _____ while measuring a good 2 amp fuse.', '0.00', '0.02', '0.20', '2.00', '0.00'),
-('QUES042', 'An anti static strap uses a small _____ to make sure you do not become the least path of resistance to the ground?', 'capacitor', 'diode', 'transistor', 'resistor', 'resistor'),
-('QUES043', 'If the memory slots have 30 pins then the chip is a?', 'DIMM', 'SIMM', 'SDRAM', 'All of the above', 'SIMM'),
-('QUES044', 'Which values are held in CMOS for the hard drive', 'size (heads, cylinders, sectors)', 'IRQ', 'Free space', 'Virus alert', 'size (heads, cylinders, sectors)'),
-('QUES045', 'What device prevents power interruptions, resulting in corrupted data?', 'Battery back-up unit', 'Surge protector', 'Multiple SIMMs strips', 'Data guard system', 'Battery back-up unit'),
-('QUES046', 'In a computer with an eide adapter, where should you connect an ATA CD-ROM drive?', 'on the floppy bus', 'on the primary IDE', 'on the secondary IDE', 'on the SCSI bus', 'on the secondary IDE'),
-('QUES047', 'What''s the best way to prevent damaging your PC with static electricity?', 'place your PC on a rubber mat', 'wear leather soled shoes', 'periodically touch a safe ground point on the PC to discharge yourself', 'wear an ESD wrist strap', 'wear an ESD wrist strap'),
-('QUES048', 'Which would you do first when troubleshooting a faulty monitor?', 'Check its connections to the computer and power source', 'Use a meter to check the CRT and internal circuitry for continuity', 'Power down the monitor, then turn it on again to see if that corrects the problem', 'Power down the computer, then turn it on again to see if that corrects the problem', 'Check its connections to the computer and power source'),
-('QUES049', 'To install a second IDE drive into a computer, you must', 'Set the master-slave jumper to slave on the second drive', 'Use the IDE configuration software to set the new drive as slave', 'Verify that you define the new drive as D: in the CMOS setup', 'Verify that you attach the drive to the connector at the end of the ribbon cable', 'Set the master-slave jumper to slave on the second drive'),
-('QUES050', 'Why does a successfully mapped network drive disappear every time you boot the computer?', 'The computer you are connected to has moved', 'You didn''t click reconnect on log on', 'The map statement is not in the autoexec.bat file', 'The last drive was not set correctly', 'The map statement is not in the autoexec.bat file'),
-('QUES051', 'Which bus is bidirectional?', 'data bus', 'control bus', 'address bus', 'multiplexed bus', 'data bus'),
-('QUES052', 'The software used to drive microprocessor-based systems is called:', 'assembly language programs', 'firmware', 'BASIC interpreter instructions', 'flowchart instructions', 'assembly language programs'),
-('QUES053', 'A microprocessor unit, a memory unit, and an input/output unit form a:', 'CPU', 'compiler', 'microcomputer', 'ALU', 'microcomputer'),
-('QUES054', 'The technique of assigning a memory address to each I/O device in the SAM system is called:', 'wired I/O', 'I/O mapping', 'dedicated I/O', 'memory-mapped I/O', 'memory-mapped I/O'),
-('QUES055', 'Which of the following is not a basic element within the microprocessor?', 'microcontroller', 'arithmetic-logic unit (ALU)', 'temporary register', 'accumulator', 'microcontroller'),
-('QUES056', 'The output will be a LOW for any case when one or more inputs are zero in a(n):', 'OR gate', 'NOT gate', 'AND gate', 'NAND gate', 'AND gate'),
-('QUES057', 'If a signal passing through a gate is inhibited by sending a low into one of the inputs, and the output is HIGH, the gate is a(n):', 'AND', 'NAND', 'NOR', 'OR', 'NAND'),
-('QUES058', 'A single transistor can be used to build which of the following digital logic gates?', 'AND gates', 'OR gates', 'NOT gates', 'NAND gates', 'NOT gates'),
-('QUES059', 'Sample-and-hold circuits in ADCs are designed to:', 'sample and hold the output of the binary counter during the conversion process', 'stabilize the ADCs threshold voltage during the conversion process', 'stabilize the input analog signal during the conversion process', 'sample and hold the ADC staircase waveform during the conversion process', 'stabilize the input analog signal during the conversion process'),
-('QUES060', 'Convert the decimal number 151.75 to binary.', '10000111.11', '11010011.01', '00111100.00', '10010111.11', '10010111.11'),
-('QUES061', 'How many digits of the DNIC (Data Network Identification Code) identify the country?', 'first three', 'first four', 'first five', 'first six', 'first three'),
-('QUES062', 'A station in a network forwards incoming packets by placing them on its shortest output queue. What routing algorithm is being used?', 'hot potato routing', 'flooding', 'static routing', 'delta routing', 'hot potato routing'),
-('QUES063', 'The probability that a single bit will be in error on a typical public telephone line using 4800 bps modem is 10 to the power -3. If no error detection mechanism is used, the residual error rate for a communication line using 9-bit frames is approximately equal to', '0.003', '0.009', '0.991', '0.999', '0.009'),
-('QUES064', 'Frames from one LAN can be transmitted to another LAN via the device', 'Router', 'Bridge', 'Repeater', 'Modem', 'Bridge'),
-('QUES065', 'Which of the following condition is used to transmit two packets over a medium at the same time?', 'Contention', 'Collision', 'Synchronous', 'Asynchronous', 'Collision'),
-('QUES066', 'You have a class A network address 10.0.0.0 with 40 subnets, but are required to add 60 new subnets very soon. You would like to still allow for the largest possible number of host IDs per subnet. Which subnet mask should you assign?', '255.240.0.0', '255.248.0.0', '255.252.0.0', '255.254.0.0', '255.254.0.0'),
-('QUES067', 'What are the most commonly used transmission speeds in BPS used in data communication?', '300', '1200', '2400', '9600', '9600'),
-('QUES068', 'What is the default subnet mask for a class C network?', '127.0.0.1', '255.0.0.0', '255.255.0.0', '255.255.255.0', '255.255.255.0'),
-('QUES069', 'Your company has a LAN in its downtown office and has now set up a LAN in the manufacturing plant in the suburbs. To enable everyone to share data and resources between the two LANs, what type of device(s) are needed to connect them? Choose the most correct answer', 'Modem', 'Cable', 'Hub', 'Router', 'Router'),
-('QUES070', 'The term DUPLEX refers to the ability of the data receiving stations to echo back a confirming message to the sender. In full duplex data transmission, both the sender and the receiver', 'cannot talk at once', 'can receive and send data simultaneously', 'can send or receive data one at a time', 'can do one way data transmission only', 'can receive and send data simultaneously'),
-('QUES071', 'The part of machine level instruction, which tells the central processor what has to be done, is', 'Operation code', 'Address', 'Locator', 'Flip-Flop', 'Operation code'),
-('QUES072', 'Which of the following refers to the associative memory?', 'the address of the data is generated by the CPU', 'the address of the data is supplied by the users', 'there is no need for an address i.e. the data is used as an address', 'the data are accessed sequentially', 'there is no need for an address i.e. the data is used as an address'),
-('QUES073', 'A system program that combines the separately compiled modules of a program into a form suitable for execution', 'assembler', 'linking loader', 'cross compiler', 'load and go', 'linking loader'),
-('QUES074', 'The Memory Buffer Register (MBR)', 'is a hardware memory device which denotes the location of the current instruction being executed', 'is a group of electrical circuits (hardware), that performs the intent of instructions fetched from memory', 'contains the address of the memory location that is to be read from or stored into', 'contains a copy of the designated memory location specified by the MAR after a READ or the new contents of the memory prior to a WRITE', 'contains a copy of the designated memory location specified by the MAR after a READ or the new contents of the memory prior to a WRITE'),
-('QUES075', 'Which of the following systems software does the job of merging the records from two files into one?', 'Security software', 'Utility program', 'Networking software', 'Documentation system', 'Utility program'),
-('QUES076', 'Which of the following instruction steps, would be written within the diamond-shaped box, of a flowchart?', 'S = B - C', 'IS A<10', 'PRINT A', 'DATA X,4Z', 'IS A<10'),
-('QUES077', 'Which of the following functions is(are) performed by the loader', 'allocate space in memory for the programs and resolve symbolic references between object decks', 'adjust all address dependent locations, such as address constants, to correspond to the allocated space', 'physically place the machine instructions and data into memory', 'All of the above', 'All of the above'),
-('QUES078', 'Which of the following addressing modes, facilitates access to an operand whose location is defined relative to the beginning of the data structure in which it appears?', 'ascending', 'sorting', 'index', 'indirect', 'index'),
-('QUES079', 'While running DOS on a PC, which command would be used to duplicate the entire diskette?', 'COPY', 'DISKCOPY', 'CHKDSK', 'TYPE', 'DISKCOPY'),
-('QUES080', 'A system program that sets up an executable program in main memory ready for execution is', 'assembler', 'linker', 'loader', 'compiler', 'loader'),
-('QUES081', 'Which of the following are loaded into main memory when the computer is booted?', 'internal command instructions', 'external command instructions', 'utility programs', 'None of the above', 'internal command instructions'),
-('QUES082', 'Which command of MS-DOS is used to copy only files that have been modified on or after the date you specify?', 'XCOPY/D : date', 'COPY/D : date', 'COPY/M', 'XCOPY/V', 'XCOPY/D : date'),
-('QUES083', 'While working with MS-DOS, which command is used to restore files that were backed up using the BACKUP command?', 'COPY', 'DISKCOPY', 'RESTORE', 'STORE', 'RESTORE'),
-('QUES084', 'What protocol is used between E-Mail servers?', 'FTP', 'SMTP', 'SNMP', 'POP3', 'SMTP'),
-('QUES085', 'If you configure the TCP/IP address and other TCP/IP parameters manually, you can always verify the configuration through which of the following? Select the best answer.', 'Network Properties dialog box', 'Server Services dialog box', 'DHCPINFO command-line utility', 'Advanced Properties tab of TCP/ IP Info', 'Network Properties dialog box'),
-('QUES086', 'In a PC to telephone hookup for long distance communication, modem is connected between the telephone line and', 'synchronous port', 'crossover cable', 'asynchronous port', 'None of the above', 'asynchronous port'),
-('QUES087', 'Which of the following communications service provides message preparation and transmission facilities?', 'Teletex', 'Teletext', 'x400', 'Fax', 'Teletex'),
-('QUES088', 'Four bits are used for packet sequence numbering in a sliding window protocol used in a computer network. What is the maximum window size?', '4', '8', '15', '16', '15'),
-('QUES089', 'Linda is in charge of a small network and wants to make it simple but secure. The users want to have full control over their data and still be able to share data with the rest of the office. The networking knowledge of the office staff is basic. Which network(s) would be the best for linda to set up?', 'Peer-to-peer', 'WAN', 'Server-based', 'Share-level', 'WAN'),
-('QUES090', 'Error control is needed at the transport layer because of potential errors occurring _____', 'from transmission line noise', 'in routers', 'from out-of-sequence delivery', 'from packet losses', 'in routers'),
-('QUES091', 'The transport layer protocol is connectionless', 'NVT', 'FTP', 'TCP', 'UDP', 'UDP'),
-('QUES092', 'The fundamental requirements of private-to-public network interconnection methods which need to be provided in gateways is/are', 'universal accessibility for private network Data Terminal Equipment (DTE)', 'adequate cost control mechanisms for administration of the private networks', 'to assign address to private network DTEs', 'a and b both', 'a and b both'),
-('QUES093', 'Data link layer retransmits the damaged frames in most networks. If the probability of a frame''s being damaged is p, what is the mean number of transmissions required to send a frame if acknowledgements are never lost', 'P I (K + 1)', 'KIK (1 + F)', '1/ (1 - F)', 'K I (K - P)', '1/ (1 - F)'),
-('QUES094', 'You are trying to decide which type of network you will use at your office, and you want the type that will provide communication and avoid collisions on the cable. Which of the following is the best choice?', 'CSMA/CA', 'Token-Ring', 'CSMA/CD', 'Ethernet', 'Token-Ring'),
-('QUES095', 'Interconnected networks need communication processors such as switches, routers, hubs, and gateways. Select the best fit for answer:', 'TCP/IP', 'Protocol', 'Open Systems', 'Internetwork processor', 'Internetwork processor'),
-('QUES096', 'Which of the following languages is more suited to a structured program?', 'PL/1', 'FORTRAN', 'BASIC', 'PASCAL', 'PASCAL'),
-('QUES097', 'The brain of any computer system is', 'ALU', 'Memory', 'CPU', 'Control unit', 'CPU'),
-('QUES098', 'The tracks on a disk which can be accessed without repositioning the R/W heads is', 'Surface', 'Cylinder', 'Cluster', 'All of the above', 'Cylinder'),
-('QUES099', 'A section of code to which control is transferred when a processor is interrupted is known as', 'M', 'SVC', 'IP', 'MDR', 'M'),
-('QUES100', 'Which part interprets program instructions and initiate control operations.', 'Input', 'Storage unit', 'Logic unit', 'Control unit', 'Control unit');
+INSERT INTO `exam` (`question_id`, `sub`, `question`, `option1`, `option2`, `option3`, `option4`, `answer`) VALUES
+('QUES001', '', 'From what location are the 1st computer instructions available on boot up?', 'ROM BIOS', 'CPU', 'boot.ini', 'CONFIG.SYS', 'ROM BIOS'),
+('QUES002', '', 'What could cause a fixed disk error', 'No-CD installed', 'bad ram', 'slow processor', 'Incorrect CMOS settings', 'Incorrect CMOS settings'),
+('QUES003', '', 'Missing slot covers on a computer can cause?', 'over heat', 'power surges', 'EMI', 'incomplete path for ESD', 'over heat'),
+('QUES004', '', 'When installing PCI NICS you can check the IRQ availability by looking at', 'dip switches', 'CONFIG.SYS', 'jumper settings', 'motherboard BIOS', 'motherboard BIOS'),
+('QUES005', '', 'With respect to a network interface card, the term 10/100 refers to', 'protocol speed', 'a fiber speed', 'megabits per seconds', 'minimum and maximum server speed', 'megabits per seconds'),
+('QUES006', '', 'Which Motherboard form factor uses one 20 pin connector', 'ATX', 'AT', 'BABY AT', 'All of the above', 'ATX'),
+('QUES007', '', 'A hard disk is divided into tracks which are further subdivided into', 'clusters', 'sectors', 'vectors', 'heads', 'sectors'),
+('QUES008', '', 'A wrist grounding strap contains which of the following', 'Surge protector', 'Capacitor', 'Voltmeter', 'Resistor', 'Resistor'),
+('QUES009', '', 'Which standard govern parallel communications?', 'RS232', 'RS-232a', 'CAT 5', 'IEEE 1284', 'IEEE 1284'),
+('QUES010', '', 'In laser printer technology, what happens during the conditioning stage?', 'The corona wire places a uniform positive charge on the paper', 'A uniform negative charge is placed on the photosensitive drum', 'A uniform negative charge is placed on the toner', 'All of the above', 'A uniform negative charge is placed on the photosensitive drum'),
+('QUES011', '', 'What product is used to clean smudged keys on a keyboard?', 'TMC solvent', 'Silicone spray', 'Denatured alcohol', 'All-purpose cleaner', 'All-purpose cleaner'),
+('QUES012', '', 'ESD would cause the most damage to which component?', 'Power supply', 'Expansion board', 'Monitor', 'Keyboard', 'Expansion board'),
+('QUES013', '', 'To view any currently running Terminate Stay Resident (TSR\'s) programs you could type', 'Memory', 'MEM', 'SYS /M', 'Memmaker', 'MEM'),
+('QUES014', '', 'Which type of system board is the MOST likely candidate for processor upgrading if you want maximum performance and future compatibility?', 'ML', 'PCI', 'ISA', 'EISA', 'PCI'),
+('QUES015', '', 'Suppose that you have a the maintenance package identifies several possible field replaceable units (FRUs) that will resolve the problem. What should you do after turning the power off?', 'Replace the indicated parts, one at a time in the recommended sequence, until the problem is resolved; return unused FRUs to stock', 'Replace all of the indicated FRUs at once and return the machine to the customer if the problem is resolved', 'Follow the same procedure as in ays replace the system board first if it is on the list of possible FRUs If multiple FRUs are indicated, then software is the most likely source of the problem', 'None of the above', 'Replace the indicated parts, one at a time in the recommended sequence, until the problem is resolved; return unused FRUs to stock'),
+('QUES016', '', 'Most PCs give a single beep on bootup to indicate they are ok hardware wise. You boot your PC and don\'t get a beep. What should you check first?', 'system board', 'RAM', 'microprocessor', 'speaker', 'speaker'),
+('QUES017', '', 'Which peripheral port provides the FASTEST throughput to laser printers?', 'RS-232', 'SCSI', 'Parallel', 'Serial', 'Parallel'),
+('QUES018', '', 'The mouse pointer moves erratically, what is the possible cause? The mouse', 'ball is dirty', 'is not connected', 'driver is not installed properly', 'has an incorrect IRQ setting', 'ball is dirty'),
+('QUES019', '', 'Voltage is measured', 'in parallel', 'in series', 'after breaking the circuit', 'after checking resistance', 'in parallel'),
+('QUES020', '', 'Your customer tells you the print quality of their dot matrix printer is light then dark. Which of the following could cause the problem', 'Paper slippage', 'Improper ribbon advancement', 'Paper thickness', 'Head position', 'Improper ribbon advancement'),
+('QUES021', '', 'The 34-pin connection on an I/O card is for?', 'Floppy drive', 'SCSI drive', 'IDE drive', 'Zip drive', 'Floppy drive'),
+('QUES022', '', 'What beep codes could indicate a system board or power supply failure?', 'steady short beep', 'no beep', 'one long continuous beep tone', 'All of the above', 'All of the above'),
+('QUES023', '', 'After doing a low-level format, what would be the next step in configuring the hard drive in a system?', 'Format DOS partition', 'Install operating system', 'Configure DMA channel and back-up interrupt', 'Partition had disk', 'Format DOS partition'),
+('QUES024', '', 'Resistance is measured in ?', 'Volts', 'Amps', 'Watts', 'Ohms', 'Ohms'),
+('QUES025', '', 'When installing a SCSI CD-ROM drive, you must set the CD-ROM SCSI adapter to', 'B0007', 'An unused SCSI address', 'The same address as the SCSI device before the CD-ROM', 'SCSI ID=1', 'An unused SCSI address'),
+('QUES026', '', 'Pick the correct choice for the 80386SXCPU', '16 bit word size, 16 bit data path', '32 bit word size, 16 bit data path', '8 bit word size, 32 bit data path', '32 bit word size, 8 bit data path', '32 bit word size, 16 bit data path'),
+('QUES027', '', 'In Inkjet technology the droplets of ink are deflected by?', 'multi directional nozzles', 'electronically charged plates', 'high pressure plates', 'electro static absorbtion', 'multi directional nozzles'),
+('QUES028', '', 'What tool is used to test serial and parallel ports?', 'high volt probe', 'cable scanner', 'loop backs (wrap plugs)', 'sniffer', 'loop backs (wrap plugs)'),
+('QUES029', '', 'What voltage does a Pentium system use?', '+12 volts', '+ 5 volts', '+ 8 volts', '+3.3 volts', '+3.3 volts'),
+('QUES030', '', 'A numeric error code check: A 17xx indicates a problem with:', 'CMOS', 'ROM BIOS', 'DMA controller', 'hard drive or controller', 'hard drive or controller'),
+('QUES031', '', 'Which provides the fastest access to large video files?', 'Optical drives', 'IDE hard drives', 'SCSI hard drives', 'EIDE hard drives', 'SCSI hard drives'),
+('QUES032', '', 'A 25-pin female connector on the back of your computer will typically be', 'Serial port 1', 'A parallel port', 'Docking', 'COM2 port', 'A parallel port'),
+('QUES033', '', 'On the PC side, the printer port is a', '25 pin female serial connector', '15 pin female parallel connector', '25 pin male serial connector', '25 pin female parallel connector', '25 pin female parallel connector'),
+('QUES034', '', 'You just installed a new IDE hard drive, but your system BIOS will not recognize the new drive, what should you check first', 'cable sequence', 'jumpers on the hard drive', 'drivers that need to be loaded', 'hard drive manufacturer web site information', 'jumpers on the hard drive'),
+('QUES035', '', 'During boot-up, the memory test', 'Is a superfluous step that should be ignored', 'Checks and verifies that contiguous memory is installed', 'Is an operational error', 'Displays what memory is installed, but nothing else', 'Checks and verifies that contiguous memory is installed'),
+('QUES036', '', 'What is the best ground for a conductive work bench?', 'AC outlet', 'Ground to bend', 'To another device', 'Chassis ground', 'AC outlet'),
+('QUES037', '', 'What is the first thing you could do to check for damage to a printer after receiving it?', 'Run MSD diagnostics', 'Attach it to a PC and print something', 'Check the cables', 'Unbox it and examine it for physical damage', 'Unbox it and examine it for physical damage'),
+('QUES038', '', 'You have a system that periodically locks up. You have ruled out software, and now suspect that it is hardware. What should you do first that could help you narrow it down to the component at fault?', 'rotate the RAM', 'replace the RAM', 'replace the level 2 cache SIMM', 'disable the CPU cache in CMOS', 'disable the CPU cache in CMOS'),
+('QUES039', '', 'What\'s the best way to protect your hard drive data?', 'regular backups', 'periodically defrag it', 'run chkdsk at least once a week', 'run scandisk at least once a week', 'regular backups'),
+('QUES040', '', 'Match the device driver HIMEM.SYS to its operation.', 'Supports (ANSI) terminal emulation', 'Manages the use of extended memory', 'Uses expanded memory on a 80386 processor', 'Supports code page switching', 'Manages the use of extended memory'),
+('QUES041', '', 'The digital multimeter is set for DC, Ohm and 20k. You will read _____ while measuring a good 2 amp fuse.', '0.00', '0.02', '0.20', '2.00', '0.00'),
+('QUES042', '', 'An anti static strap uses a small _____ to make sure you do not become the least path of resistance to the ground?', 'capacitor', 'diode', 'transistor', 'resistor', 'resistor'),
+('QUES043', '', 'If the memory slots have 30 pins then the chip is a?', 'DIMM', 'SIMM', 'SDRAM', 'All of the above', 'SIMM'),
+('QUES044', '', 'Which values are held in CMOS for the hard drive', 'size (heads, cylinders, sectors)', 'IRQ', 'Free space', 'Virus alert', 'size (heads, cylinders, sectors)'),
+('QUES045', '', 'What device prevents power interruptions, resulting in corrupted data?', 'Battery back-up unit', 'Surge protector', 'Multiple SIMMs strips', 'Data guard system', 'Battery back-up unit'),
+('QUES046', '', 'In a computer with an eide adapter, where should you connect an ATA CD-ROM drive?', 'on the floppy bus', 'on the primary IDE', 'on the secondary IDE', 'on the SCSI bus', 'on the secondary IDE'),
+('QUES047', '', 'What\'s the best way to prevent damaging your PC with static electricity?', 'place your PC on a rubber mat', 'wear leather soled shoes', 'periodically touch a safe ground point on the PC to discharge yourself', 'wear an ESD wrist strap', 'wear an ESD wrist strap'),
+('QUES048', '', 'Which would you do first when troubleshooting a faulty monitor?', 'Check its connections to the computer and power source', 'Use a meter to check the CRT and internal circuitry for continuity', 'Power down the monitor, then turn it on again to see if that corrects the problem', 'Power down the computer, then turn it on again to see if that corrects the problem', 'Check its connections to the computer and power source'),
+('QUES049', '', 'To install a second IDE drive into a computer, you must', 'Set the master-slave jumper to slave on the second drive', 'Use the IDE configuration software to set the new drive as slave', 'Verify that you define the new drive as D: in the CMOS setup', 'Verify that you attach the drive to the connector at the end of the ribbon cable', 'Set the master-slave jumper to slave on the second drive'),
+('QUES050', '', 'Why does a successfully mapped network drive disappear every time you boot the computer?', 'The computer you are connected to has moved', 'You didn\'t click reconnect on log on', 'The map statement is not in the autoexec.bat file', 'The last drive was not set correctly', 'The map statement is not in the autoexec.bat file'),
+('QUES051', '', 'Which bus is bidirectional?', 'data bus', 'control bus', 'address bus', 'multiplexed bus', 'data bus'),
+('QUES052', '', 'The software used to drive microprocessor-based systems is called:', 'assembly language programs', 'firmware', 'BASIC interpreter instructions', 'flowchart instructions', 'assembly language programs'),
+('QUES053', '', 'A microprocessor unit, a memory unit, and an input/output unit form a:', 'CPU', 'compiler', 'microcomputer', 'ALU', 'microcomputer'),
+('QUES054', '', 'The technique of assigning a memory address to each I/O device in the SAM system is called:', 'wired I/O', 'I/O mapping', 'dedicated I/O', 'memory-mapped I/O', 'memory-mapped I/O'),
+('QUES055', '', 'Which of the following is not a basic element within the microprocessor?', 'microcontroller', 'arithmetic-logic unit (ALU)', 'temporary register', 'accumulator', 'microcontroller'),
+('QUES056', '', 'The output will be a LOW for any case when one or more inputs are zero in a(n):', 'OR gate', 'NOT gate', 'AND gate', 'NAND gate', 'AND gate'),
+('QUES057', '', 'If a signal passing through a gate is inhibited by sending a low into one of the inputs, and the output is HIGH, the gate is a(n):', 'AND', 'NAND', 'NOR', 'OR', 'NAND'),
+('QUES058', '', 'A single transistor can be used to build which of the following digital logic gates?', 'AND gates', 'OR gates', 'NOT gates', 'NAND gates', 'NOT gates'),
+('QUES059', '', 'Sample-and-hold circuits in ADCs are designed to:', 'sample and hold the output of the binary counter during the conversion process', 'stabilize the ADCs threshold voltage during the conversion process', 'stabilize the input analog signal during the conversion process', 'sample and hold the ADC staircase waveform during the conversion process', 'stabilize the input analog signal during the conversion process'),
+('QUES060', '', 'Convert the decimal number 151.75 to binary.', '10000111.11', '11010011.01', '00111100.00', '10010111.11', '10010111.11'),
+('QUES061', '', 'How many digits of the DNIC (Data Network Identification Code) identify the country?', 'first three', 'first four', 'first five', 'first six', 'first three'),
+('QUES062', '', 'A station in a network forwards incoming packets by placing them on its shortest output queue. What routing algorithm is being used?', 'hot potato routing', 'flooding', 'static routing', 'delta routing', 'hot potato routing'),
+('QUES063', '', 'The probability that a single bit will be in error on a typical public telephone line using 4800 bps modem is 10 to the power -3. If no error detection mechanism is used, the residual error rate for a communication line using 9-bit frames is approximately equal to', '0.003', '0.009', '0.991', '0.999', '0.009'),
+('QUES064', '', 'Frames from one LAN can be transmitted to another LAN via the device', 'Router', 'Bridge', 'Repeater', 'Modem', 'Bridge'),
+('QUES065', '', 'Which of the following condition is used to transmit two packets over a medium at the same time?', 'Contention', 'Collision', 'Synchronous', 'Asynchronous', 'Collision'),
+('QUES066', '', 'You have a class A network address 10.0.0.0 with 40 subnets, but are required to add 60 new subnets very soon. You would like to still allow for the largest possible number of host IDs per subnet. Which subnet mask should you assign?', '255.240.0.0', '255.248.0.0', '255.252.0.0', '255.254.0.0', '255.254.0.0'),
+('QUES067', '', 'What are the most commonly used transmission speeds in BPS used in data communication?', '300', '1200', '2400', '9600', '9600'),
+('QUES068', '', 'What is the default subnet mask for a class C network?', '127.0.0.1', '255.0.0.0', '255.255.0.0', '255.255.255.0', '255.255.255.0'),
+('QUES069', '', 'Your company has a LAN in its downtown office and has now set up a LAN in the manufacturing plant in the suburbs. To enable everyone to share data and resources between the two LANs, what type of device(s) are needed to connect them? Choose the most correct answer', 'Modem', 'Cable', 'Hub', 'Router', 'Router'),
+('QUES070', '', 'The term DUPLEX refers to the ability of the data receiving stations to echo back a confirming message to the sender. In full duplex data transmission, both the sender and the receiver', 'cannot talk at once', 'can receive and send data simultaneously', 'can send or receive data one at a time', 'can do one way data transmission only', 'can receive and send data simultaneously'),
+('QUES071', '', 'The part of machine level instruction, which tells the central processor what has to be done, is', 'Operation code', 'Address', 'Locator', 'Flip-Flop', 'Operation code'),
+('QUES072', '', 'Which of the following refers to the associative memory?', 'the address of the data is generated by the CPU', 'the address of the data is supplied by the users', 'there is no need for an address i.e. the data is used as an address', 'the data are accessed sequentially', 'there is no need for an address i.e. the data is used as an address'),
+('QUES073', '', 'A system program that combines the separately compiled modules of a program into a form suitable for execution', 'assembler', 'linking loader', 'cross compiler', 'load and go', 'linking loader'),
+('QUES074', '', 'The Memory Buffer Register (MBR)', 'is a hardware memory device which denotes the location of the current instruction being executed', 'is a group of electrical circuits (hardware), that performs the intent of instructions fetched from memory', 'contains the address of the memory location that is to be read from or stored into', 'contains a copy of the designated memory location specified by the MAR after a READ or the new contents of the memory prior to a WRITE', 'contains a copy of the designated memory location specified by the MAR after a READ or the new contents of the memory prior to a WRITE'),
+('QUES075', '', 'Which of the following systems software does the job of merging the records from two files into one?', 'Security software', 'Utility program', 'Networking software', 'Documentation system', 'Utility program'),
+('QUES076', '', 'Which of the following instruction steps, would be written within the diamond-shaped box, of a flowchart?', 'S = B - C', 'IS A<10', 'PRINT A', 'DATA X,4Z', 'IS A<10'),
+('QUES077', '', 'Which of the following functions is(are) performed by the loader', 'allocate space in memory for the programs and resolve symbolic references between object decks', 'adjust all address dependent locations, such as address constants, to correspond to the allocated space', 'physically place the machine instructions and data into memory', 'All of the above', 'All of the above'),
+('QUES078', '', 'Which of the following addressing modes, facilitates access to an operand whose location is defined relative to the beginning of the data structure in which it appears?', 'ascending', 'sorting', 'index', 'indirect', 'index'),
+('QUES079', '', 'While running DOS on a PC, which command would be used to duplicate the entire diskette?', 'COPY', 'DISKCOPY', 'CHKDSK', 'TYPE', 'DISKCOPY'),
+('QUES080', '', 'A system program that sets up an executable program in main memory ready for execution is', 'assembler', 'linker', 'loader', 'compiler', 'loader'),
+('QUES081', '', 'Which of the following are loaded into main memory when the computer is booted?', 'internal command instructions', 'external command instructions', 'utility programs', 'None of the above', 'internal command instructions'),
+('QUES082', '', 'Which command of MS-DOS is used to copy only files that have been modified on or after the date you specify?', 'XCOPY/D : date', 'COPY/D : date', 'COPY/M', 'XCOPY/V', 'XCOPY/D : date'),
+('QUES083', '', 'While working with MS-DOS, which command is used to restore files that were backed up using the BACKUP command?', 'COPY', 'DISKCOPY', 'RESTORE', 'STORE', 'RESTORE'),
+('QUES084', '', 'What protocol is used between E-Mail servers?', 'FTP', 'SMTP', 'SNMP', 'POP3', 'SMTP'),
+('QUES085', '', 'If you configure the TCP/IP address and other TCP/IP parameters manually, you can always verify the configuration through which of the following? Select the best answer.', 'Network Properties dialog box', 'Server Services dialog box', 'DHCPINFO command-line utility', 'Advanced Properties tab of TCP/ IP Info', 'Network Properties dialog box'),
+('QUES086', '', 'In a PC to telephone hookup for long distance communication, modem is connected between the telephone line and', 'synchronous port', 'crossover cable', 'asynchronous port', 'None of the above', 'asynchronous port'),
+('QUES087', '', 'Which of the following communications service provides message preparation and transmission facilities?', 'Teletex', 'Teletext', 'x400', 'Fax', 'Teletex'),
+('QUES088', '', 'Four bits are used for packet sequence numbering in a sliding window protocol used in a computer network. What is the maximum window size?', '4', '8', '15', '16', '15'),
+('QUES089', '', 'Linda is in charge of a small network and wants to make it simple but secure. The users want to have full control over their data and still be able to share data with the rest of the office. The networking knowledge of the office staff is basic. Which network(s) would be the best for linda to set up?', 'Peer-to-peer', 'WAN', 'Server-based', 'Share-level', 'WAN'),
+('QUES090', '', 'Error control is needed at the transport layer because of potential errors occurring _____', 'from transmission line noise', 'in routers', 'from out-of-sequence delivery', 'from packet losses', 'in routers'),
+('QUES091', '', 'The transport layer protocol is connectionless', 'NVT', 'FTP', 'TCP', 'UDP', 'UDP'),
+('QUES092', '', 'The fundamental requirements of private-to-public network interconnection methods which need to be provided in gateways is/are', 'universal accessibility for private network Data Terminal Equipment (DTE)', 'adequate cost control mechanisms for administration of the private networks', 'to assign address to private network DTEs', 'a and b both', 'a and b both'),
+('QUES093', '', 'Data link layer retransmits the damaged frames in most networks. If the probability of a frame\'s being damaged is p, what is the mean number of transmissions required to send a frame if acknowledgements are never lost', 'P I (K + 1)', 'KIK (1 + F)', '1/ (1 - F)', 'K I (K - P)', '1/ (1 - F)'),
+('QUES094', '', 'You are trying to decide which type of network you will use at your office, and you want the type that will provide communication and avoid collisions on the cable. Which of the following is the best choice?', 'CSMA/CA', 'Token-Ring', 'CSMA/CD', 'Ethernet', 'Token-Ring'),
+('QUES095', '', 'Interconnected networks need communication processors such as switches, routers, hubs, and gateways. Select the best fit for answer:', 'TCP/IP', 'Protocol', 'Open Systems', 'Internetwork processor', 'Internetwork processor'),
+('QUES096', '', 'Which of the following languages is more suited to a structured program?', 'PL/1', 'FORTRAN', 'BASIC', 'PASCAL', 'PASCAL'),
+('QUES097', '', 'The brain of any computer system is', 'ALU', 'Memory', 'CPU', 'Control unit', 'CPU'),
+('QUES098', '', 'The tracks on a disk which can be accessed without repositioning the R/W heads is', 'Surface', 'Cylinder', 'Cluster', 'All of the above', 'Cylinder'),
+('QUES099', '', 'A section of code to which control is transferred when a processor is interrupted is known as', 'M', 'SVC', 'IP', 'MDR', 'M'),
+('QUES100', '', 'Which part interprets program instructions and initiate control operations.', 'Input', 'Storage unit', 'Logic unit', 'Control unit', 'Control unit');
 
 -- --------------------------------------------------------
 
@@ -149,6 +153,7 @@ INSERT INTO `exam` (`question_id`, `question`, `option1`, `option2`, `option3`, 
 -- Table structure for table `examstate`
 --
 
+DROP TABLE IF EXISTS `examstate`;
 CREATE TABLE IF NOT EXISTS `examstate` (
   `state` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -158,7 +163,7 @@ CREATE TABLE IF NOT EXISTS `examstate` (
 --
 
 INSERT INTO `examstate` (`state`) VALUES
-('unlocked');
+('locked');
 
 -- --------------------------------------------------------
 
@@ -166,6 +171,7 @@ INSERT INTO `examstate` (`state`) VALUES
 -- Table structure for table `results_info`
 --
 
+DROP TABLE IF EXISTS `results_info`;
 CREATE TABLE IF NOT EXISTS `results_info` (
   `result_id` varchar(255) NOT NULL,
   `student_no` varchar(255) NOT NULL,
@@ -176,12 +182,20 @@ CREATE TABLE IF NOT EXISTS `results_info` (
   UNIQUE KEY `result_id` (`result_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `results_info`
+--
+
+INSERT INTO `results_info` (`result_id`, `student_no`, `student_name`, `score`, `date`, `status`) VALUES
+('RST:59507436', 'STD:4511/32/9', 'phongml', '25', '13th  November 2019 12:43:42 AM', 'FAIL');
+
 -- --------------------------------------------------------
 
 --
 -- Table structure for table `school_info`
 --
 
+DROP TABLE IF EXISTS `school_info`;
 CREATE TABLE IF NOT EXISTS `school_info` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
@@ -205,6 +219,7 @@ INSERT INTO `school_info` (`name`, `email`, `address`, `phone`, `slogan`, `logo`
 -- Table structure for table `school_mail`
 --
 
+DROP TABLE IF EXISTS `school_mail`;
 CREATE TABLE IF NOT EXISTS `school_mail` (
   `servername` varchar(255) NOT NULL,
   `username` varchar(255) NOT NULL,
@@ -226,12 +241,13 @@ INSERT INTO `school_mail` (`servername`, `username`, `password`, `port`) VALUES
 -- Table structure for table `tokens`
 --
 
+DROP TABLE IF EXISTS `tokens`;
 CREATE TABLE IF NOT EXISTS `tokens` (
   `token_id` int(255) NOT NULL AUTO_INCREMENT,
   `token` varchar(255) NOT NULL,
   `user` varchar(255) NOT NULL,
   UNIQUE KEY `token_id` (`token_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -239,6 +255,7 @@ CREATE TABLE IF NOT EXISTS `tokens` (
 -- Table structure for table `user_info`
 --
 
+DROP TABLE IF EXISTS `user_info`;
 CREATE TABLE IF NOT EXISTS `user_info` (
   `user_id` varchar(255) NOT NULL,
   `user_index` int(255) NOT NULL AUTO_INCREMENT,
@@ -252,14 +269,16 @@ CREATE TABLE IF NOT EXISTS `user_info` (
   `regdate` varchar(255) NOT NULL,
   PRIMARY KEY (`user_index`),
   UNIQUE KEY `user_id` (`user_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=21 ;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `user_info`
 --
 
 INSERT INTO `user_info` (`user_id`, `user_index`, `full_name`, `gender`, `email`, `address`, `role`, `avatar`, `password`, `regdate`) VALUES
-('OES/000/00', 19, 'Admin Fullname', 'Male', 'adminmail@mail.com', 'Admin Address', 'Admin', NULL, '123456', '27/03/2017');
+('OES/000/00', 19, 'Admin Fullname', 'Male', 'admin@gmail.com', 'Admin Address', 'Admin', NULL, '123456', '27/03/2017'),
+('STD:4511/32/9', 21, 'phongml', 'Female', 'phongml@gmail.com', 'ml', 'Student', NULL, '123456', '12th  November 2019 12:10:54 PM');
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
