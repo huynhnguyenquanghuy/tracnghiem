@@ -175,15 +175,14 @@ include 'count_records.php';
         <li class="treeview" >
           <a href="#">
             <i class="fa fa-user"></i>
-            <span>Students</span>
+            <span>Students&Teachers</span>
    
           </a>
           <ul class="treeview-menu">
           <li ><a href="new_student.php"><i class="fa fa-circle-o"></i> Đăng kí học sinh  mới</a></li>
             <li><a href="students.php"><i class="fa fa-circle-o"></i> Chỉnh sửa học sinh</a></li>
             <li ><a href="new_teacher.php"><i class="fa fa-circle-o"></i> Đăng kí giáo viên mới</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Chỉnh sửa học sinh</a></li>
-          </ul>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Chỉnh sửa giáo viên</a></li>
         </li>
         <li>
      	  <li class="treeview active">

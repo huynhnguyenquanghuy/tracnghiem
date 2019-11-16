@@ -1,29 +1,6 @@
 <?php
 include 'check_login.php';
 include 'count_records.php';
-if(isset($_GET['ref'])) {
-	$stdid = $_GET['ref'];
-	include '../db_config/connection.php';
-	
-	$sql = "SELECT * FROM user_info where user_id = '$stdid'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-
-    while($row = $result->fetch_assoc()) {
-        $fullname = $row['full_name'];
-		$sgender = $row['gender'];
-		$email = $row['email'];
-		$address = $row['address'];
-    }
-} else {
-  
-}
-$conn->close();
-
-}else{
-	header("location:./");
-}
 ?>
 
 <!DOCTYPE html>
@@ -31,7 +8,7 @@ $conn->close();
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>OES | <?php echo"$fullname"; ?></title>
+  <title>OES | New Examination</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -179,7 +156,7 @@ $conn->close();
                    } else {
                  
                   }
-                   $conn->close();
+                   $conn->close()
 			  
 			  ?>
       
@@ -195,12 +172,14 @@ $conn->close();
         <li class="treeview active" >
           <a href="#">
             <i class="fa fa-user"></i>
-            <span>Students</span>
+            <span>Students&Teacher</span>
    
           </a>
           <ul class="treeview-menu">
-            <li class="active"><a href="new_student.php"><i class="fa fa-circle"></i> Register New Student</a></li>
-            <li><a href="students.php"><i class="fa fa-circle-o"></i> Customize Students</a></li>
+          <li ><a href="new_student.php"><i class="fa fa-circle-o"></i> Đăng kí học sinh  mới</a></li>
+            <li><a href="students.php"><i class="fa fa-circle-o"></i> Chỉnh sửa học sinh</a></li>
+            <li ><a href="new_teacher.php"><i class="fa fa-circle-o"></i> Đăng kí giáo viên mới</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Chỉnh sửa giáo viên</a></li>
           </ul>
         </li>
         <li>
@@ -210,9 +189,8 @@ $conn->close();
             <span>Examination</span>
    
           </a>
-   <ul class="treeview-menu">
-   <li><a href="results.php"><i class="fa fa-circle-o"></i> Kết Quả</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
+     <ul class="treeview-menu">
+     <li><a href="#"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Thêm câu hỏi</a></li>
            <li><a href="examination.php"><i class="fa fa-circle-o"></i> Sửa câu hỏi</a></li>
 		       <li><a href="lock_exam.php"><i class="fa fa-circle-o"></i> Khóa bài thi</a></li>
@@ -252,12 +230,12 @@ $conn->close();
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Update Student <?php echo"$stdid"; ?>
+        New Examination
       
       </h1>
       <ol class="breadcrumb">
         <li><a href="./"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Update Student <?php echo"$stdid"; ?></li>
+        <li class="active">New Examination</li>
       </ol>
     </section>
 
@@ -270,27 +248,18 @@ $conn->close();
             <div class="box-header">
               <i class="fa fa-user"></i>
 
-              <h3 class="box-title"><?php echo"$fullname"; ?> Information</h3>
+              <h3 class="box-title">Exam Information</h3>
 		
 
             </div>
             <div class="box-body">
 			<?php
-if(isset($_GET['error'])) {
-	$error = $_GET['error'];
-print '<div class="callout callout-warning">
-        <h4>Could not update record!</h4>
-        '.$error.'
-      </div>';
-}
-?>
-
-			<?php
 if(isset($_GET['msg'])) {
 	$error = $_GET['msg'];
+	$used = $_GET['student'];
 print '<div class="callout callout-warning">
-        <h4>Could not update record!</h4>
-        '.$error.'
+        <h4>'.$error.'!</h4>
+        Email is used by '.$used.' please select another email
       </div>';
 }
 ?>
@@ -304,44 +273,39 @@ print '<div class="callout callout-success">
       </div>';
 }
 ?>
-              <form action="up_std.php?ref=<?php echo"$stdid"; ?>" method="post">
+              <form action="new_std.php" method="post">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="name"  value="<?php echo"$fullname"; ?>" placeholder="Student Full Name" required>
+                <div class="form-group">
+                  <select class="form-control" name="Sub" required>
+                    <option value="" disabled selected>Chọn Môn</option>
+                    <option value="Toán">Toán</option>
+                    <option value="Lý">Lý</option>
+                  </select>
+                </div>
+                  <input type="text" class="form-control" name="ques"  placeholder="Nhập câu hỏi" required>
 
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" name="email"  value="<?php echo"$email"; ?>" placeholder="Student Email" required>
+                  <input type="text" class="form-control" name="op1"  placeholder="câu trả lời 1" required>
                 </div>
 				 <div class="form-group">
-                  <input type="text" class="form-control" name="address"  value="<?php echo"$address"; ?>" placeholder="Student Address" required>
+                  <input type="text" class="form-control" name="op2"  placeholder="câu trả lời 2" required>
                 </div>
-		
-				<div class="form-group">
-  
-				  <?php
-				  if ($sgender == "Male") {
-					  print '<select name="gender" class="form-control">
-                    <option>Female</option>
-                    <option selected>Male</option>
-              
-                  </select>';
-				  }else{
-					  print '
-					  <select name="gender" class="form-control">
-                    <option selected>Female</option>
-                    <option>Male</option>
-              
-                  </select>
-					  ';
-				  }
-				  ?>
-              
+                <div class="form-group">
+                  <input type="text" class="form-control" name="op3"  placeholder="câu trả lời 3" required>
                 </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="op4"  placeholder="câu trả lời 4" required>
+                </div>
+                <div class="form-group">
+                  <input type="text" class="form-control" name="ans"  placeholder="đáp án" required>
+                </div>
+				
               
               
             </div>
             <div class="box-footer clearfix">
-              <button type="submit" class="pull-right btn btn-default" name="newstd" id="sendEmail">Update Student
+              <button type="submit" class="pull-right btn btn-default" name="new_exam.php" >new exam
                 <i class="fa fa-arrow-circle-up"></i></button>
             </div>
 			</form>
@@ -355,10 +319,9 @@ print '<div class="callout callout-success">
     <div class="pull-right hidden-xs">
       <b>Version</b> 3.0
     </div>
-    <strong>Copyright &copy; <?php echo date('Y'); ?> Developed By <a target="_blank" href="http://facebook.com/narbie1995">Bwire Charles Mashauri</a>.</strong> All rights
+    <strong>Copyright &copy; <?php echo date('Y'); ?> Developed By <a target="_blank" href="http://facebook.com/huy.huynhnguyenquang">BHPH</a>.</strong> All rights
     reserved.
   </footer>
-
 
 
   <div class="control-sidebar-bg"></div>

@@ -19,14 +19,22 @@ if ($result->num_rows > 0) {
             $_SESSION['username'] = $my_username;
             $_SESSION['fullname'] = $fullname;
 			header("location:../admin/");
-		}else{
+		}elseif($user_role == "Student"){
 			setcookie(loggedin, date("F jS - g:i a"), $seconds);
             session_start();
             $_SESSION['loggedin'] = true;
             $_SESSION['username'] = $my_username;
             $_SESSION['fullname'] = $fullname;
 			header("location:../student/");
-		}
+        }
+        else{
+            setcookie(loggedin, date("F jS - g:i a"), $seconds);
+            session_start();
+            $_SESSION['loggedin'] = true;
+            $_SESSION['username'] = $my_username;
+            $_SESSION['fullname'] = $fullname;
+			header("location:../teacher/");
+        }
         
     }
 } else {

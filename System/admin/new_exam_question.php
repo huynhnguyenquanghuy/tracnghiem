@@ -1,6 +1,5 @@
 <?php
 include 'check_login.php';
-include 'count_records.php';
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +7,7 @@ include 'count_records.php';
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>OES | Register Student</title>
+  <title>OES | Assessment</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -107,13 +106,13 @@ include 'count_records.php';
 
                 <p>
                   <?php echo"$current_user"; ?>
-                  <small><?php echo"$regid"; ?> , Admin</small>
+                  <small><?php echo"$regid"; ?> , Student</small>
                 </p>
               </li>
           
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="profile.php" class="btn btn-default btn-flat">Profile</a>
+                  <a href="./" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -169,56 +168,33 @@ include 'count_records.php';
 
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="treeview active" >
-          <a href="#">
-            <i class="fa fa-user"></i>
-            <span>Students</span>
-   
-          </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="new_student.php"><i class="fa fa-circle"></i> Register New Student</a></li>
-            <li><a href="students.php"><i class="fa fa-circle-o"></i> Customize Students</a></li>
-          </ul>
-        </li>
+
         <li>
-     	  <li class="treeview">
+     	  <li class="treeview active">
           <a href="#">
             <i class="fa fa-file-text"></i>
             <span>Examination</span>
    
           </a>
      <ul class="treeview-menu">
-            <li><a href="results.php"><i class="fa fa-circle-o"></i> Results</a></li>
-           <li><a href="examination.php"><i class="fa fa-circle-o"></i> Customize Questions</a></li>
-		   <li><a href="lock_exam.php"><i class="fa fa-circle-o"></i> Lock Exam</a></li>
-		   <li><a href="unlock_exam.php"><i class="fa fa-circle-o"></i> Unlock Exam</a></li>
+            <li><a href="instruction.php"><i class="fa fa-circle-o"></i> Instructions</a></li>
+           <li class="active"><a href="begin_assessment.php"><i class="fa fa-circle"></i> Begin assessment</a></li>
           </ul>
         </li>
-		
-		  <li class="treeview">
+			  <li class="treeview">
           <a href="#">
-            <i class="fa fa-envelope"></i>
-            <span>Email</span>
+            <i class="fa fa-users"></i>
+            <span>Students</span>
    
           </a>
-          <ul class="treeview-menu">
-            <li><a href="email_config.php"><i class="fa fa-circle-o"></i> Configuration</a></li>
-           
+     <ul class="treeview-menu">
+            <li class="active"><a href="students.php"><i class="fa fa-circle-o"></i> View students</a></li>
           </ul>
         </li>
 
-        <li class="header">SYSTEM</li>
-     	  <li class="treeview">
-          <a href="#">
-            <i class="fa fa-database"></i>
-            <span>Database</span>
-   
-          </a>
-          <ul class="treeview-menu">
-            <li><a <a onclick="return confirm('Are you sure you want to delete all students ?');" href="delete_students.php"><i class="fa fa-circle-o"></i> Delete all students</a></li>
-           <li><a <a onclick="return confirm('Are you sure you want to delete all results ?');" href="delete_results.php"><i class="fa fa-circle-o"></i> Delete all results</a></li>
-          </ul>
-        </li>
+
+        
+
       </ul>
     </section>
  
@@ -227,77 +203,30 @@ include 'count_records.php';
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Register Student
+        Assessment Information
       
       </h1>
       <ol class="breadcrumb">
         <li><a href="./"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Register Student</li>
+        <li class="active">Assessment Information</li>
       </ol>
     </section>
 
     <section class="content">
-    
-      <div class="row">
-        <section class="col-lg-12">
+    <?php
+include '../db_config/connection.php';
 
-          <div class="box box-info">
-            <div class="box-header">
-              <i class="fa fa-user"></i>
-
-              <h3 class="box-title">Student Information</h3>
-		
-
-            </div>
-            <div class="box-body">
-			<?php
-if(isset($_GET['msg'])) {
-	$error = $_GET['msg'];
-	$used = $_GET['student'];
-print '<div class="callout callout-warning">
-        <h4>'.$error.'!</h4>
-        Email is used by '.$used.' please select another email
+print '
+	<div class="callout callout-info">
+        <h4>Assessment is active!</h4>
+        Click'; ?> <a onclick="return confirm('Tạo Đề ?');" href="#.php">here</a><?php print ' to begin the assessment
       </div>';
-}
 ?>
 
-			<?php
-if(isset($_GET['message'])) {
-	$error = $_GET['message'];
-print '<div class="callout callout-success">
-        <h4>'.$error.'</h4>
-        Default password is 123456
-      </div>';
-}
-?>
-              <form action="new_std.php" method="post">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="name"  placeholder="Student Full Name" required>
+<div class="row">
 
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" name="email"  placeholder="Student Email" required>
-                </div>
-				 <div class="form-group">
-                  <input type="text" class="form-control" name="address"  placeholder="Student Address" required>
-                </div>
-				<div class="form-group">
-                  <select class="form-control" name="gender" required>
-                    <option value="" disabled selected>Select gender</option>
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                  </select>
-                </div>
-              
-              
-            </div>
-            <div class="box-footer clearfix">
-              <button type="submit" class="pull-right btn btn-default" name="newstd" id="sendEmail">Register Student
-                <i class="fa fa-arrow-circle-up"></i></button>
-            </div>
-			</form>
-          </div>
-        </section>
+
+
       </div>
 
     </section>
