@@ -1,6 +1,8 @@
 <?php
 include 'check_login.php';
 include 'count_records.php';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +10,7 @@ include 'count_records.php';
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>OES | Register Teacher</title>
+  <title>OES | Examination Update</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -74,6 +76,7 @@ include 'count_records.php';
             </a>
             <ul class="dropdown-menu">
               <li class="user-header">
+			  
 			  <?php
 			  include '../db_config/connection.php';
 			  
@@ -169,28 +172,27 @@ include 'count_records.php';
 
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="treeview active" >
+        <li class="treeview" >
           <a href="#">
             <i class="fa fa-user"></i>
             <span>Students</span>
    
           </a>
           <ul class="treeview-menu">
-          <li ><a href="new_student.php"><i class="fa fa-circle-o"></i> Đăng kí học sinh  mới</a></li>
-            <li><a href="students.php"><i class="fa fa-circle-o"></i> Chỉnh sửa học sinh</a></li>
-            <li ><a href="new_teacher.php"><i class="fa fa-circle-o"></i> Đăng kí giáo viên mới</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Chỉnh sửa học sinh</a></li>
+            <li><a href="new_student.php"><i class="fa fa-circle-o"></i> Register New Student</a></li>
+            <li class="active"><a href="students.php"><i class="fa fa-circle"></i> Customize Students</a></li>
           </ul>
         </li>
         <li>
-     	  <li class="treeview">
+     	  <li class="treeview active">
           <a href="#">
             <i class="fa fa-file-text"></i>
             <span>Examination</span>
    
           </a>
-     <ul class="treeview-menu">
-     <li><a href="#"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
+   <ul class="treeview-menu">
+   <li><a href="results.php"><i class="fa fa-circle-o"></i> Kết Quả</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Thêm câu hỏi</a></li>
            <li><a href="examination.php"><i class="fa fa-circle-o"></i> Sửa câu hỏi</a></li>
 		       <li><a href="lock_exam.php"><i class="fa fa-circle-o"></i> Khóa bài thi</a></li>
@@ -230,12 +232,12 @@ include 'count_records.php';
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Register Teacher
+        Examination Update
       
       </h1>
       <ol class="breadcrumb">
         <li><a href="./"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Register Teacher</li>
+        <li class="active">Examination Update</li>
       </ol>
     </section>
 
@@ -246,61 +248,112 @@ include 'count_records.php';
 
           <div class="box box-info">
             <div class="box-header">
-              <i class="fa fa-user"></i>
+              <i class="fa fa-file-text"></i>
 
-              <h3 class="box-title">Teacher Information</h3>
+              <h3 class="box-title">Examination Questions</h3>
 		
 
             </div>
             <div class="box-body">
-			<?php
-if(isset($_GET['msg'])) {
-	$error = $_GET['msg'];
-	$used = $_GET['teacher'];
-print '<div class="callout callout-warning">
-        <h4>'.$error.'!</h4>
-        Email is used by '.$used.' please select another email
-      </div>';
-}
-?>
+		<table class="table">
+                <tbody><tr>
+                
+                  <th>#</th>
+                  <th>Question</th>
+				   <th>Options</th>
+                </tr>
+               <tbody>
+			   <?php
+			   
+			   include '../db_config/connection.php';
+			   error_reporting(0);
+			    $page =$_GET['page'];
+									   if ($page=="" || $page=="1")
+									   {
+										   $page1=0;
+									   }else{
+										   $page1=($page*10)-10;
+									   }
+									   
+			   $sql = "SELECT * FROM exam limit $page1,10";
+             $result = $conn->query($sql);
 
-			<?php
-if(isset($_GET['message'])) {
-	$error = $_GET['message'];
-print '<div class="callout callout-success">
-        <h4>'.$error.'</h4>
-        Default password is 123456
+             if ($result->num_rows > 0) {
+   
+              while($row = $result->fetch_assoc()) {
+             
+			echo "<tr><td>" . $row["question_id"]. "</td><td>" . $row["question"]. "</td>";
+		    print '<td><a title="Edit '.$row["question"].'" class="btn btn-block btn-primary btn-xs" href="update_quest.php?ref='.$row["question_id"].'&page='.$page.'"><i class="fa fa-edit"></i></a>
+		
+			
+			</td>';
+               }
+               } else {
+                print '</table><div class="callout callout-success">
+        <h4>No examination question found</h4>
+        examination questions will be shown here
       </div>';
-}
-?>
-              <form action="new_tea.php" method="post">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="name"  placeholder="Teacher Full Name" required>
+                  }
+                 $conn->close();
+			   ?>
+			   
+              </tbody></table>
+              <ul class="pagination">
+			  <?php
+			  
+			  if(isset($_GET['info'])) {
+		
+				 ?>
+				 <script>
+				 alert("Exam is now locked");
+				 </script>
+				 <?php
+			  }
+			    if(isset($_GET['err'])) {
+			
+				 ?>
+				 <script>
+				 alert("Could not lock exam");
+				 </script>
+				 <?php
+			  }
+			  	  if(isset($_GET['info2'])) {
+		
+				 ?>
+				 <script>
+				 alert("Exam is now unlocked");
+				 </script>
+				 <?php
+			  }
+			    if(isset($_GET['err2'])) {
+			
+				 ?>
+				 <script>
+				 alert("Could not unlock exam");
+				 </script>
+				 <?php
+			  }
+						 include '../db_config/connection.php';
+						$sql = "SELECT * FROM exam";
+$result = $conn->query($sql);
 
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" name="email"  placeholder="Teacher Email" required>
-                </div>
-				 <div class="form-group">
-                  <input type="text" class="form-control" name="address"  placeholder="Teacher Address" required>
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="Sub"  placeholder="Teacher Sub" required>
-                </div>
-				<div class="form-group">
-                  <select class="form-control" name="gender" required>
-                    <option value="" disabled selected>Select gender</option>
-                    <option value="Male">Nam</option>
-                    <option value="Female">Nữ</option>
-                  </select>
-                </div>
-              
+if ($result->num_rows > 0) {
+	print '<tr><td colspan="10">';
+$ragents=mysqli_num_rows($result);
+$a = $ragents/10;
+$a = ceil($a);
+for ($b=1;$b<=$a;$b++)
+{
+	?> <li class="paginate_button"><a href="examination.php?page=<?php echo $b; ?>" ><?php echo $b. " "; ?></a></li><?php
+}
+}
+$conn->close();
+						?>
+			 
+			  </ul>
               
             </div>
-            <div class="box-footer clearfix">
-              <button type="submit" class="pull-right btn btn-default" name="new_tea" id="sendEmail">Register Teacher
-                <i class="fa fa-arrow-circle-up"></i></button>
-            </div>
+        
 			</form>
           </div>
         </section>
@@ -315,6 +368,7 @@ print '<div class="callout callout-success">
     <strong>Copyright &copy; <?php echo date('Y'); ?> Developed By <a target="_blank" href="http://facebook.com/huy.huynhnguyenquang">BHPH</a>.</strong> All rights
     reserved.
   </footer>
+
 
 
   <div class="control-sidebar-bg"></div>
