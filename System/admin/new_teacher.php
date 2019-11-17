@@ -8,7 +8,7 @@ include 'count_records.php';
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>OES | Register Student</title>
+  <title>OES | Register Teacher</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -298,7 +298,7 @@ print '<div class="callout callout-success">
               
             </div>
             <div class="box-footer clearfix">
-              <button type="submit" class="pull-right btn btn-default" name="newstd" id="sendEmail">Register Teacher
+              <button type="submit" class="pull-right btn btn-default" name="new_tea" id="sendEmail">Register Teacher
                 <i class="fa fa-arrow-circle-up"></i></button>
             </div>
 			</form>
