@@ -1,50 +1,53 @@
 <?php
- if(isset($_POST['newstd'])) {
- $ques = $_POST['question'];
+ if(isset($_POST['new_exam'])) {
+ $ques = $_POST['ques'];
  $sub = $_POST['sub'];
- $op1 = $_POST['option1'];
- $op2 = $_POST['option2'];
- $op3 = $_POST['option3'];
- $op4 = $_POST['option4'];
- $ans = $_POST['answer'];
+ $op1 = $_POST['op1'];
+ $op2 = $_POST['op2'];
+ $op3 = $_POST['op3'];
+ $op4 = $_POST['op4'];
+ $ans = $_POST['ans'];
+
+
+include '../db_config/connection.php';
+
+$sqlString = "SELECT * FROM exam";
+if ($result = $conn->query($sqlString)) 
+	{
+		while ($row = $result->fetch_array()) 
+		{
+			$dem++;
+		}
+	}
+	$dem++;
+	if($dem<10)
+	{
+		$dem="QUES00$dem";
+	}
+	
+	if($dem<100 and $dem>10)
+	{
+		$dem="QUES0$dem";
+	}
+	else
+		$dem="QUES$dem";
+
+$sql = "INSERT INTO exam (question_id, sub, question, option1, option2, option3,option4,answer)
+VALUES ('$dem', N'$sub', N'$ques', N'$op1', N'$op2', N'$op3', N'$op4', N'$ans')";
+
+if ($conn->query($sql) === TRUE) {
+    header("location:new_examfontend.php?message=$ques have been registered with ID $dem");
+} 
+else {
+	$error = $conn->error;
+     header("location:new_examfontend.php?err=$error");
+}
+
+$conn->close();
+
 }else{
 	header("location:./");
 }
-
-include '../db_config/connection.php';
-
-$sql = "SELECT * FROM exam where question = '$ques'";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-
-    while($row = $result->fetch_assoc()) {
-		$ques = $row['question'];
-       header("location:new_exam.php?msg=Email $ques is not available&student=$question");
-    }
-} else {
-  $regdate = date('jS \ F Y h:i:s A');
-$examno = 'QUES:'.rand(1000,9999).'/'.rand(10,99).'/'.rand(0,9).'';
-
-include '../db_config/connection.php';
-
-$sql = "INSERT INTO exam (question_id, sub, question, option1, option2, option3,option4,answer)
-VALUES ('$examno', '$sub', '$question', '$op1', '$op2', '$op3', '$op4', '$ans')";
-
-if ($conn->query($sql) === TRUE) {
-    header("location:new_exam.php?message=$ques have been registered with ID $examno");
-} else {
-	$error = $conn->error;
-     header("location:new_exam.php?err=$error");
-}
-
-$conn->close();
-
-
-
-}
-$conn->close();
-
 ?>
 
 
