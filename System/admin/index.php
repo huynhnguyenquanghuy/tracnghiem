@@ -180,7 +180,7 @@ include 'count_records.php';
           <li ><a href="new_student.php"><i class="fa fa-circle-o"></i> Đăng kí học sinh  mới</a></li>
             <li><a href="students.php"><i class="fa fa-circle-o"></i> Chỉnh sửa học sinh</a></li>
             <li ><a href="new_teacher.php"><i class="fa fa-circle-o"></i> Đăng kí giáo viên mới</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Chỉnh sửa giáo viên</a></li>
+            <li><a href="teacher.php"><i class="fa fa-circle-o"></i> Chỉnh sửa giáo viên</a></li>
           </ul>
         </li>
         <li>

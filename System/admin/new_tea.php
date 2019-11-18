@@ -21,7 +21,7 @@ $result = $conn->query($sql);
 		}
     }
 $regdate = date('jS \ F Y h:i:s A');
-$teano = 'STD:'.rand(1000,9999).'/'.rand(10,99).'/'.rand(0,9).'';
+$teano = 'TEA:'.rand(1000,9999).'/'.rand(10,99).'/'.rand(0,9).'';
 
 $sql = "INSERT INTO user_info (user_id, full_name, sub, gender, email, address, role, regdate)
 VALUES ('$teano', '$teaname', N'$teasub', '$gender','$teaem', '$teaadd','Teacher', '$regdate')";
@@ -43,5 +43,3 @@ $conn->close();
 }
 
 ?>
-
-

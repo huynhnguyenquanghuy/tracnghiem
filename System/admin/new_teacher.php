@@ -284,9 +284,18 @@ print '<div class="callout callout-success">
 				 <div class="form-group">
                   <input type="text" class="form-control" name="address"  placeholder="Teacher Address" required>
                 </div>
+                
                 <div class="form-group">
-                  <input type="text" class="form-control" name="Sub"  placeholder="Teacher Sub" required>
+                  <select class="form-control" name="Sub" required>
+                    <option value="" disabled selected>Teacher Sub</option>
+                    <option value="Toán">Toán</option>
+                    <option value="LÝ">Lý</option>
+                    <option value="Hóa">Hóa</option>
+                    <option value="Tin">Tin</option>
+                  </select>
                 </div>
+              
+              
 				<div class="form-group">
                   <select class="form-control" name="gender" required>
                     <option value="" disabled selected>Select gender</option>
