@@ -12,13 +12,15 @@
 include '../db_config/connection.php';
 
 $sqlString = "SELECT * FROM exam";
-if ($result = $conn->query($sqlString)) 
-	{
-		while ($row = $result->fetch_array()) 
-		{
-			$dem++;
+$result = $conn->query($sqlString);
+	while ($row = $result->fetch_array()) 
+		{	if($row['question'] == $ques)
+			{
+				header("location:new_examfontend.php?err= cau hoi da ton tai");
+			}
+			else
+				$dem++;
 		}
-	}
 	$dem++;
 	if($dem<10)
 	{
@@ -35,16 +37,14 @@ if ($result = $conn->query($sqlString))
 $sql = "INSERT INTO exam (question_id, sub, question, option1, option2, option3,option4,answer)
 VALUES ('$dem', N'$sub', N'$ques', N'$op1', N'$op2', N'$op3', N'$op4', N'$ans')";
 
-if ($conn->query($sql) === TRUE) {
+if ($conn->query($sql)) {
     header("location:new_examfontend.php?message=$ques have been registered with ID $dem");
 } 
 else {
 	$error = $conn->error;
      header("location:new_examfontend.php?err=$error");
 }
-
 $conn->close();
-
 }else{
 	header("location:./");
 }
