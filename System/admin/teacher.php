@@ -1,6 +1,8 @@
 <?php
 include 'check_login.php';
 include 'count_records.php';
+
+
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +10,7 @@ include 'count_records.php';
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>OES | Register Teacher</title>
+  <title>OES | Register Student</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -172,12 +174,12 @@ include 'count_records.php';
         <li class="treeview active" >
           <a href="#">
             <i class="fa fa-user"></i>
-            <span>Students</span>
+            <span>Teacher</span>
    
           </a>
           <ul class="treeview-menu">
           <li ><a href="new_student.php"><i class="fa fa-circle-o"></i> Đăng kí học sinh  mới</a></li>
-            <li><a href="students.php"><i class="fa fa-circle-o"></i> Chỉnh sửa học sinh</a></li>
+            <li><a href="Teacher.php"><i class="fa fa-circle-o"></i> Chỉnh sửa học sinh</a></li>
             <li ><a href="new_teacher.php"><i class="fa fa-circle-o"></i> Đăng kí giáo viên mới</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Chỉnh sửa học sinh</a></li>
           </ul>
@@ -189,8 +191,9 @@ include 'count_records.php';
             <span>Examination</span>
    
           </a>
-     <ul class="treeview-menu">
-     <li><a href="#"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
+   <ul class="treeview-menu">
+            <<li><a href="results.php"><i class="fa fa-circle-o"></i> Kết Quả</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Thêm câu hỏi</a></li>
            <li><a href="examination.php"><i class="fa fa-circle-o"></i> Sửa câu hỏi</a></li>
 		       <li><a href="lock_exam.php"><i class="fa fa-circle-o"></i> Khóa bài thi</a></li>
@@ -218,7 +221,7 @@ include 'count_records.php';
    
           </a>
           <ul class="treeview-menu">
-            <li><a <a onclick="return confirm('Are you sure you want to delete all students ?');" href="delete_students.php"><i class="fa fa-circle-o"></i> Delete all students</a></li>
+            <li><a <a onclick="return confirm('Are you sure you want to delete all Teacher ?');" href="delete_Teacher.php"><i class="fa fa-circle-o"></i> Delete all Teacher</a></li>
            <li><a <a onclick="return confirm('Are you sure you want to delete all results ?');" href="delete_results.php"><i class="fa fa-circle-o"></i> Delete all results</a></li>
           </ul>
         </li>
@@ -230,12 +233,12 @@ include 'count_records.php';
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Register Teacher
+        Registered Teacher
       
       </h1>
       <ol class="breadcrumb">
         <li><a href="./"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Register Teacher</li>
+        <li class="active">Registered Teacher</li>
       </ol>
     </section>
 
@@ -246,61 +249,82 @@ include 'count_records.php';
 
           <div class="box box-info">
             <div class="box-header">
-              <i class="fa fa-user"></i>
+              <i class="fa fa-users"></i>
 
-              <h3 class="box-title">Teacher Information</h3>
+              <h3 class="box-title">Teacher found on Database</h3>
 		
 
             </div>
             <div class="box-body">
-			<?php
-if(isset($_GET['msg'])) {
-	$error = $_GET['msg'];
-	$used = $_GET['teacher'];
-print '<div class="callout callout-warning">
-        <h4>'.$error.'!</h4>
-        Email is used by '.$used.' please select another email
-      </div>';
-}
-?>
+		<table class="table">
+                <tbody><tr>
+                
+                  <th>Teacher Number</th>
+                  <th>Full Name</th>
+                  <th>Gender</th>
+				  <th>Email</th>
+				  <th>Address</th>
+				  <th>Reg. Date</th>
+				   <th>Options</th>
+                </tr>
+               <tbody>
+			   <?php
+			   include '../db_config/connection.php';
+			   error_reporting(0);
+			    $page =$_GET['page'];
+									   if ($page=="" || $page=="1")
+									   {
+										   $page1=0;
+									   }else{
+										   $page1=($page*10)-10;
+									   }
+									   
+			   $sql = "SELECT * FROM user_info where role = 'Teacher' ORDER BY full_name limit $page1,10";
+             $result = $conn->query($sql);
 
-			<?php
-if(isset($_GET['message'])) {
-	$error = $_GET['message'];
-print '<div class="callout callout-success">
-        <h4>'.$error.'</h4>
-        Default password is 123456
+             if ($result->num_rows > 0) {
+   
+              while($row = $result->fetch_assoc()) {
+             
+			echo "<tr><td>" . $row["user_id"]. "</td><td>" . $row["full_name"]. "</td><td>". $row['gender']. "</td><td>". $row['email']. "</td><td>". $row['address']."</td><td>".$row['regdate']."</td>";
+		    print '<td><a title="Edit '.$row["full_name"].'" class="btn btn-block btn-primary btn-xs" href="update_std.php?ref='.$row["user_id"].'"><i class="fa fa-edit"></i></a>
+			<a '; ?> 	<a onclick="return confirm('Are you sure you want to delete <?php echo $row['full_name']; ?> ?');" <?php print 'title="Delete '.$row["full_name"].'" class="btn btn-block btn-danger btn-xs" href="delete_std.php?ref='.$row["user_id"].'&page='.$page1.'"><i class="fa fa-trash-o"></i></a>
+			
+			</td>';
+               }
+               } else {
+                print '<div class="callout callout-success">
+        <h4>You have not registered any student</h4>
+        Registered student will be shown here
       </div>';
-}
-?>
-              <form action="new_tea.php" method="post">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="name"  placeholder="Teacher Full Name" required>
+                  }
+                 $conn->close();
+			   ?>
+			   
+              </tbody></table>
+              <ul class="pagination">
+			  <?php
+						 include '../db_config/connection.php';
+						$sql = "SELECT * FROM user_info where role = 'Teacher' ORDER BY full_name";
+$result = $conn->query($sql);
 
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" name="email"  placeholder="Teacher Email" required>
-                </div>
-				 <div class="form-group">
-                  <input type="text" class="form-control" name="address"  placeholder="Teacher Address" required>
-                </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="Sub"  placeholder="Teacher Sub" required>
-                </div>
-				<div class="form-group">
-                  <select class="form-control" name="gender" required>
-                    <option value="" disabled selected>Select gender</option>
-                    <option value="Male">Nam</option>
-                    <option value="Female">Nữ</option>
-                  </select>
-                </div>
-              
+if ($result->num_rows > 0) {
+	print '<tr><td colspan="10">';
+$ragents=mysqli_num_rows($result);
+$a = $ragents/10;
+$a = ceil($a);
+for ($b=1;$b<=$a;$b++)
+{
+	?> <li class="paginate_button"><a href="teacher.php?page=<?php echo $b; ?>" ><?php echo $b. " "; ?></a></li><?php
+}
+}
+$conn->close();
+						?>
+			 
+			  </ul>
               
             </div>
-            <div class="box-footer clearfix">
-              <button type="submit" class="pull-right btn btn-default" name="new_tea" id="sendEmail">Register Teacher
-                <i class="fa fa-arrow-circle-up"></i></button>
-            </div>
+        
 			</form>
           </div>
         </section>

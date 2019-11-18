@@ -1,6 +1,7 @@
 <?php
 include 'check_login.php';
 include 'count_records.php';
+include '../db_config/connection.php';
 ?>
 
 <!DOCTYPE html>
@@ -41,8 +42,6 @@ include 'count_records.php';
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 								  <?php
-			  include '../db_config/connection.php';
-			  
 			  $sql = "SELECT * FROM user_info where user_id='$myusername' or email='$myusername'";
                $result = $conn->query($sql);
 
@@ -66,8 +65,6 @@ include 'count_records.php';
                    } else {
                 
                   }
-                   $conn->close();
-			  
 			  ?>
           
               <span class="hidden-xs"><?php echo"$current_user"; ?></span>
@@ -75,8 +72,6 @@ include 'count_records.php';
             <ul class="dropdown-menu">
               <li class="user-header">
 			  <?php
-			  include '../db_config/connection.php';
-			  
 			  $sql = "SELECT * FROM user_info where user_id='$myusername' or email='$myusername'";
                $result = $conn->query($sql);
 
@@ -100,11 +95,7 @@ include 'count_records.php';
                    } else {
                  
                   }
-                   $conn->close();
-			  
 			  ?>
-                
-
                 <p>
                   <?php echo"$current_user"; ?>
                   <small><?php echo"$regid"; ?> , Admin</small>
@@ -131,8 +122,6 @@ include 'count_records.php';
       <div class="user-panel">
         <div class="pull-left image">
 					  <?php
-			  include '../db_config/connection.php';
-			  
 			  $sql = "SELECT * FROM user_info where user_id='$myusername' or email='$myusername'";
                $result = $conn->query($sql);
 
@@ -156,8 +145,7 @@ include 'count_records.php';
                    } else {
                  
                   }
-                   $conn->close()
-			  
+				$conn->close();
 			  ?>
       
         </div>
@@ -172,8 +160,7 @@ include 'count_records.php';
         <li class="treeview active" >
           <a href="#">
             <i class="fa fa-user"></i>
-            <span>Students&Teacher</span>
-   
+            <span>Students&Teacher </span> 
           </a>
           <ul class="treeview-menu">
           <li ><a href="new_student.php"><i class="fa fa-circle-o"></i> Đăng kí học sinh  mới</a></li>
@@ -187,7 +174,6 @@ include 'count_records.php';
           <a href="#">
             <i class="fa fa-file-text"></i>
             <span>Examination</span>
-   
           </a>
      <ul class="treeview-menu">
      <li><a href="#"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
@@ -196,26 +182,21 @@ include 'count_records.php';
 		       <li><a href="lock_exam.php"><i class="fa fa-circle-o"></i> Khóa bài thi</a></li>
 		        <li><a href="unlock_exam.php"><i class="fa fa-circle-o"></i> Mở khóa bài thi</a></li>
           </ul>
-        </li>
-		
+        </li>		
 		  <li class="treeview">
           <a href="#">
             <i class="fa fa-envelope"></i>
-            <span>Email</span>
-   
+            <span>Email</span>   
           </a>
           <ul class="treeview-menu">
-            <li><a href="email_config.php"><i class="fa fa-circle-o"></i> Configuration</a></li>
-           
+            <li><a href="email_config.php"><i class="fa fa-circle-o"></i> Configuration</a></li>          
           </ul>
         </li>
-
         <li class="header">SYSTEM</li>
      	  <li class="treeview">
           <a href="#">
             <i class="fa fa-database"></i>
-            <span>Database</span>
-   
+            <span>Database</span>  
           </a>
           <ul class="treeview-menu">
             <li><a <a onclick="return confirm('Are you sure you want to delete all students ?');" href="delete_students.php"><i class="fa fa-circle-o"></i> Delete all students</a></li>
@@ -223,67 +204,39 @@ include 'count_records.php';
           </ul>
         </li>
       </ul>
-    </section>
- 
+    </section> 
   </aside>
-
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        New Examination
-      
+        New Examination    
       </h1>
       <ol class="breadcrumb">
         <li><a href="./"><i class="fa fa-dashboard"></i> Home</a></li>
         <li class="active">New Examination</li>
       </ol>
     </section>
-
-    <section class="content">
-    
+    <section class="content"> 
       <div class="row">
         <section class="col-lg-12">
-
           <div class="box box-info">
             <div class="box-header">
               <i class="fa fa-user"></i>
-
               <h3 class="box-title">Exam Information</h3>
-		
-
             </div>
             <div class="box-body">
-			<?php
-if(isset($_GET['msg'])) {
-	$error = $_GET['msg'];
-	$used = $_GET['student'];
-print '<div class="callout callout-warning">
-        <h4>'.$error.'!</h4>
-        Email is used by '.$used.' please select another email
-      </div>';
-}
-?>
-
-			<?php
-if(isset($_GET['message'])) {
-	$error = $_GET['message'];
-print '<div class="callout callout-success">
-        <h4>'.$error.'</h4>
-        Default password is 123456
-      </div>';
-}
-?>
-              <form action="new_std.php" method="post">
+              <form action="new_exam.php" method='POST'>
                 <div class="form-group">
                 <div class="form-group">
-                  <select class="form-control" name="Sub" required>
+                  
+				  <select class="form-control" name="sub" required>
                     <option value="" disabled selected>Chọn Môn</option>
                     <option value="Toán">Toán</option>
                     <option value="Lý">Lý</option>
                   </select>
                 </div>
+				<div class="form-group">
                   <input type="text" class="form-control" name="ques"  placeholder="Nhập câu hỏi" required>
-
                 </div>
                 <div class="form-group">
                   <input type="text" class="form-control" name="op1"  placeholder="câu trả lời 1" required>
@@ -300,12 +253,9 @@ print '<div class="callout callout-success">
                 <div class="form-group">
                   <input type="text" class="form-control" name="ans"  placeholder="đáp án" required>
                 </div>
-				
-              
-              
             </div>
             <div class="box-footer clearfix">
-              <button type="submit" class="pull-right btn btn-default" name="new_exam.php" >new exam
+              <button type="submit" class="pull-right btn btn-default" name="new_exam" id="sendEmail">Add question</button>
                 <i class="fa fa-arrow-circle-up"></i></button>
             </div>
 			</form>

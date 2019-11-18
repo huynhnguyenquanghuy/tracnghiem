@@ -1,6 +1,29 @@
 <?php
 include 'check_login.php';
 include 'count_records.php';
+if(isset($_GET['ref'])) {
+	$stdid = $_GET['ref'];
+	include '../db_config/connection.php';
+	
+	$sql = "SELECT * FROM user_info where user_id = '$stdid'";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+
+    while($row = $result->fetch_assoc()) {
+        $fullname = $row['full_name'];
+		$sgender = $row['gender'];
+		$email = $row['email'];
+		$address = $row['address'];
+    }
+} else {
+  
+}
+$conn->close();
+
+}else{
+	header("location:./");
+}
 ?>
 
 <!DOCTYPE html>
@@ -8,7 +31,7 @@ include 'count_records.php';
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>OES | Register Teacher</title>
+  <title>OES | <?php echo"$fullname"; ?></title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -189,8 +212,9 @@ include 'count_records.php';
             <span>Examination</span>
    
           </a>
-     <ul class="treeview-menu">
-     <li><a href="#"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
+   <ul class="treeview-menu">
+   <li><a href="results.php"><i class="fa fa-circle-o"></i> Kết Quả</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Thêm câu hỏi</a></li>
            <li><a href="examination.php"><i class="fa fa-circle-o"></i> Sửa câu hỏi</a></li>
 		       <li><a href="lock_exam.php"><i class="fa fa-circle-o"></i> Khóa bài thi</a></li>
@@ -230,12 +254,12 @@ include 'count_records.php';
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Register Teacher
+        Update Student <?php echo"$stdid"; ?>
       
       </h1>
       <ol class="breadcrumb">
         <li><a href="./"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Register Teacher</li>
+        <li class="active">Update Student <?php echo"$stdid"; ?></li>
       </ol>
     </section>
 
@@ -248,18 +272,27 @@ include 'count_records.php';
             <div class="box-header">
               <i class="fa fa-user"></i>
 
-              <h3 class="box-title">Teacher Information</h3>
+              <h3 class="box-title"><?php echo"$fullname"; ?> Information</h3>
 		
 
             </div>
             <div class="box-body">
 			<?php
+if(isset($_GET['error'])) {
+	$error = $_GET['error'];
+print '<div class="callout callout-warning">
+        <h4>Could not update record!</h4>
+        '.$error.'
+      </div>';
+}
+?>
+
+			<?php
 if(isset($_GET['msg'])) {
 	$error = $_GET['msg'];
-	$used = $_GET['teacher'];
 print '<div class="callout callout-warning">
-        <h4>'.$error.'!</h4>
-        Email is used by '.$used.' please select another email
+        <h4>Could not update record!</h4>
+        '.$error.'
       </div>';
 }
 ?>
@@ -273,32 +306,44 @@ print '<div class="callout callout-success">
       </div>';
 }
 ?>
-              <form action="new_tea.php" method="post">
+              <form action="up_std.php?ref=<?php echo"$stdid"; ?>" method="post">
                 <div class="form-group">
-                  <input type="text" class="form-control" name="name"  placeholder="Teacher Full Name" required>
+                  <input type="text" class="form-control" name="name"  value="<?php echo"$fullname"; ?>" placeholder="Student Full Name" required>
 
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control" name="email"  placeholder="Teacher Email" required>
+                  <input type="email" class="form-control" name="email"  value="<?php echo"$email"; ?>" placeholder="Student Email" required>
                 </div>
 				 <div class="form-group">
-                  <input type="text" class="form-control" name="address"  placeholder="Teacher Address" required>
+                  <input type="text" class="form-control" name="address"  value="<?php echo"$address"; ?>" placeholder="Student Address" required>
                 </div>
-                <div class="form-group">
-                  <input type="text" class="form-control" name="Sub"  placeholder="Teacher Sub" required>
-                </div>
+		
 				<div class="form-group">
-                  <select class="form-control" name="gender" required>
-                    <option value="" disabled selected>Select gender</option>
-                    <option value="Male">Nam</option>
-                    <option value="Female">Nữ</option>
+  
+				  <?php
+				  if ($sgender == "Male") {
+					  print '<select name="gender" class="form-control">
+                    <option>Female</option>
+                    <option selected>Male</option>
+              
+                  </select>';
+				  }else{
+					  print '
+					  <select name="gender" class="form-control">
+                    <option selected>Female</option>
+                    <option>Male</option>
+              
                   </select>
+					  ';
+				  }
+				  ?>
+              
                 </div>
               
               
             </div>
             <div class="box-footer clearfix">
-              <button type="submit" class="pull-right btn btn-default" name="new_tea" id="sendEmail">Register Teacher
+              <button type="submit" class="pull-right btn btn-default" name="newstd" id="sendEmail">Update Student
                 <i class="fa fa-arrow-circle-up"></i></button>
             </div>
 			</form>
@@ -312,9 +357,10 @@ print '<div class="callout callout-success">
     <div class="pull-right hidden-xs">
       <b>Version</b> 3.0
     </div>
-    <strong>Copyright &copy; <?php echo date('Y'); ?> Developed By <a target="_blank" href="http://facebook.com/huy.huynhnguyenquang">BHPH</a>.</strong> All rights
+    <strong>Copyright &copy; <?php echo date('Y'); ?> Developed By <a target="_blank" href="http://facebook.com/narbie1995">Bwire Charles Mashauri</a>.</strong> All rights
     reserved.
   </footer>
+
 
 
   <div class="control-sidebar-bg"></div>
