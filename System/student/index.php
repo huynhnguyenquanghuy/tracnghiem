@@ -177,9 +177,11 @@ include 'check_login.php';
    
           </a>
      <ul class="treeview-menu">
-            <li><a href="instruction.php"><i class="fa fa-circle-o"></i> Instructions</a></li>
-           <li><a href="begin_assessment.php"><i class="fa fa-circle-o"></i> Begin assessment</a></li>
-           <!-- <li><a href="begin_assessment1.php"><i class="fa fa-circle-o"></i> Begin assessment1</a></li> -->
+     <li><a href="instruction.php"><i class="fa fa-circle-o"></i> Instructions</a></li>
+           <li class="active"><a href="begin_assessment.php"><i class="fa fa-circle"></i> Begin assessment</a></li>
+           <li class="active"><a href="toan.php"><i class="fa fa-circle"></i> toan</a></li>
+           <li class="active"><a href="ly.php"><i class="fa fa-circle"></i> ly</a></li>
+           <li class="active"><a href="hoa.php"><i class="fa fa-circle"></i> Hóa</a></li>
           </ul>
         </li>
 			  <li class="treeview">

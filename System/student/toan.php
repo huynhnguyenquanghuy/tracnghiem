@@ -1,25 +1,5 @@
 <?php
 include 'check_login.php';
-include 'count_records.php';
-
-	include '../db_config/connection.php';
-	
-	$sql = "SELECT * FROM school_mail";
-$result = $conn->query($sql);
-
-if ($result->num_rows > 0) {
-
-    while($row = $result->fetch_assoc()) {
-       $mserver = $row['servername'];
-	   $musername = $row['username'];
-	   $mpassword = $row['password'];
-	   $mport = $row['port'];
-    }
-} else {
-  
-}
-$conn->close();
-
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +7,7 @@ $conn->close();
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>OES | Mail configuration</title>
+  <title>OES | Assessment</title>
   <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
   <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -126,13 +106,13 @@ $conn->close();
 
                 <p>
                   <?php echo"$current_user"; ?>
-                  <small><?php echo"$regid"; ?> , Admin</small>
+                  <small><?php echo"$regid"; ?> , Student</small>
                 </p>
               </li>
           
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="profile.php" class="btn btn-default btn-flat">Profile</a>
+                  <a href="./" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
                   <a href="logout.php" class="btn btn-default btn-flat">Sign out</a>
@@ -188,60 +168,36 @@ $conn->close();
 
       <ul class="sidebar-menu">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="treeview" >
-          <a href="#">
-            <i class="fa fa-user"></i>
-            <span>Students</span>
-   
-          </a>
-          <ul class="treeview-menu">
-            <li ><a href="new_student.php"><i class="fa fa-circle-o"></i> Đăng kí học sinh  mới</a></li>
-            <li><a href="students.php"><i class="fa fa-circle-o"></i> Chỉnh sửa học sinh</a></li>
-            <li ><a href="#"><i class="fa fa-circle-o"></i> Đăng kí giáo viên mới</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Chỉnh sửa học sinh</a></li>
-          </ul>
-        </li>
+
         <li>
-     	  <li class="treeview">
+     	  <li class="treeview active">
           <a href="#">
             <i class="fa fa-file-text"></i>
             <span>Examination</span>
    
           </a>
-   <ul class="treeview-menu">
-   <li><a href="results.php"><i class="fa fa-circle-o"></i> Kết Quả</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Thêm câu hỏi</a></li>
-           <li><a href="examination.php"><i class="fa fa-circle-o"></i> Sửa câu hỏi</a></li>
-		       <li><a href="lock_exam.php"><i class="fa fa-circle-o"></i> Khóa bài thi</a></li>
-		        <li><a href="unlock_exam.php"><i class="fa fa-circle-o"></i> Mở khóa bài thi</a></li>
+     <ul class="treeview-menu">
+            <li><a href="instruction.php"><i class="fa fa-circle-o"></i> Instructions</a></li>
+           <li class="active"><a href="begin_assessment.php"><i class="fa fa-circle"></i> Begin assessment</a></li>
+           <li class="active"><a href="toan.php"><i class="fa fa-circle"></i> toan</a></li>
+           <li class="active"><a href="ly.php"><i class="fa fa-circle"></i> ly</a></li>
+           <li class="active"><a href="hoa.php"><i class="fa fa-circle"></i> Hóa</a></li>
           </ul>
         </li>
-		
-		  <li class="treeview active">
+			  <li class="treeview">
           <a href="#">
-            <i class="fa fa-envelope"></i>
-            <span>Email</span>
+            <i class="fa fa-users"></i>
+            <span>Students</span>
    
           </a>
-          <ul class="treeview-menu">
-            <li class="active"><a href="email_config.php"><i class="fa fa-circle"></i> Configuration</a></li>
-           
+     <ul class="treeview-menu">
+            <li class="active"><a href="students.php"><i class="fa fa-circle-o"></i> View students</a></li>
           </ul>
         </li>
 
-        <li class="header">SYSTEM</li>
-     	  <li class="treeview">
-          <a href="#">
-            <i class="fa fa-database"></i>
-            <span>Database</span>
-   
-          </a>
-          <ul class="treeview-menu">
-            <li><a <a onclick="return confirm('Are you sure you want to delete all students ?');" href="delete_students.php"><i class="fa fa-circle-o"></i> Delete all students</a></li>
-           <li><a <a onclick="return confirm('Are you sure you want to delete all results ?');" href="delete_results.php"><i class="fa fa-circle-o"></i> Delete all results</a></li>
-          </ul>
-        </li>
+
+        
+
       </ul>
     </section>
  
@@ -250,75 +206,67 @@ $conn->close();
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-        Mail Configuration
+        Assessment Information
       
       </h1>
       <ol class="breadcrumb">
         <li><a href="./"><i class="fa fa-dashboard"></i> Home</a></li>
-        <li class="active">Mail Configuration</li>
+        <li class="active">Assessment Information</li>
       </ol>
     </section>
 
     <section class="content">
-    
-      <div class="row">
-        <section class="col-lg-12">
+    <?php
+include '../db_config/connection.php';
 
-          <div class="box box-info">
-            <div class="box-header">
-              <i class="fa fa-envelope"></i>
+$sql = "SELECT * FROM results_info where student_no = '$regid'";
+$result = $conn->query($sql);
 
-              <h3 class="box-title">Mail Configuration</h3>
-		
-
-            </div>
-            <div class="box-body">
-			<?php
-if(isset($_GET['err'])) {
-	$error = $_GET['err'];
-print '<div class="callout callout-warning">
-        <h4>'.$error.'!</h4>
-		Could not update mail settings
+if ($result->num_rows > 0) {
+ 
+    while($row = $result->fetch_assoc()) {
+      	print '
+	<div class="callout callout-success">
+        <h4>Assessment Taken</h4>
+        You have already attempt the exam on '. $row['date'].' , your score was '. $row['score'].'%
       </div>';
+    }
+} else {
+  include '../db_config/connection.php';
+  $sql = "SELECT * FROM examstate";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while($row = $result->fetch_assoc()) {
+      $examstate = $row['state'];
+
+
+if ($examstate == "locked") {
+	print '
+	<div class="callout callout-warning">
+        <h4>Assessment is locked!</h4>
+        Assessment is not active
+      </div>';
+}else {
+		print '
+	<div class="callout callout-info">
+        <h4>Assessment is active!</h4>
+        Click'; ?> <a onclick="return confirm('Begin assessment ?');" href="exam.php">here</a><?php print ' to begin the assessment
+      </div>';
+}
+
+    }
+} else {
+ 
+}
+$conn->close();
 }
 ?>
 
-			<?php
-if(isset($_GET['message'])) {
-	$error = $_GET['message'];
-print '<div class="callout callout-success">
-        <h4>'.$error.'</h4>
-        Default password is 123456
-      </div>';
-}
-?>
-              <form action="up_mail.php" method="post">
-                <div class="form-group">
-                  <input type="text" class="form-control" name="server"  value="<?php echo"$mserver"; ?>" placeholder="Server Name / Host" required>
+<div class="row">
 
-                </div>
-                <div class="form-group">
-                  <input type="email" class="form-control" name="email"  value="<?php echo"$musername"; ?>" placeholder="Username / Email" required>
-                </div>
-				 <div class="form-group">
-                  <input type="text" class="form-control" name="password"  value="<?php echo"$mpassword"; ?>" placeholder="Password" required>
-                </div>
-				<div class="form-group">
-                  <input type="text" class="form-control" name="port"  value="<?php echo"$mport"; ?>" placeholder="Port" required>
-                </div>
-				<div class="form-group">
-              
-                </div>
-              
-              
-            </div>
-            <div class="box-footer clearfix">
-              <button type="submit" class="pull-right btn btn-default"  id="sendEmail">Update mail settings
-                <i class="fa fa-arrow-circle-up"></i></button>
-            </div>
-			</form>
-          </div>
-        </section>
+
+
       </div>
 
     </section>
@@ -330,6 +278,7 @@ print '<div class="callout callout-success">
     <strong>Copyright &copy; <?php echo date('Y'); ?> Developed By <a target="_blank" href="http://facebook.com/huy.huynhnguyenquang">BHPH</a>.</strong> All rights
     reserved.
   </footer>
+
 
   <div class="control-sidebar-bg"></div>
 </div>

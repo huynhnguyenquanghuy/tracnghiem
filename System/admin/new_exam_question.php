@@ -167,33 +167,62 @@ include 'check_login.php';
       </div>
 
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
-
+      <li class="header">MAIN NAVIGATION</li>
+        <li class="treeview active" >
+          <a href="#">
+            <i class="fa fa-user"></i>
+            <span>Students</span>
+   
+          </a>
+          <ul class="treeview-menu">
+          <li ><a href="new_student.php"><i class="fa fa-circle-o"></i> Đăng kí học sinh  mới</a></li>
+            <li><a href="students.php"><i class="fa fa-circle-o"></i> Chỉnh sửa học sinh</a></li>
+            <li ><a href="new_teacher.php"><i class="fa fa-circle-o"></i> Đăng kí giáo viên mới</a></li>
+            <li><a href="teacher.php"><i class="fa fa-circle-o"></i> Chỉnh sửa giáo viên</a></li>
+          </ul>
+        </li>
         <li>
-     	  <li class="treeview active">
+     	  <li class="treeview">
           <a href="#">
             <i class="fa fa-file-text"></i>
             <span>Examination</span>
    
           </a>
-     <ul class="treeview-menu">
-            <li><a href="instruction.php"><i class="fa fa-circle-o"></i> Instructions</a></li>
-           <li class="active"><a href="begin_assessment.php"><i class="fa fa-circle"></i> Begin assessment</a></li>
+          <ul class="treeview-menu">
+            <li><a href="results.php"><i class="fa fa-circle-o"></i> Kết Quả</a></li>
+            <li><a href="new_exam_question.php"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
+            <li><a href="new_examfontend.php"><i class="fa fa-circle-o"></i> Thêm câu hỏi</a></li>
+           <li><a href="examination.php"><i class="fa fa-circle-o"></i> Sửa câu hỏi</a></li>
+		       <li><a href="lock_exam.php"><i class="fa fa-circle-o"></i> Khóa bài thi</a></li>
+            <li><a href="unlock_exam.php"><i class="fa fa-circle-o"></i> Mở khóa bài thi</a></li>
+            <!-- <li class="active"><a href="begin_assessment.php"><i class="fa fa-circle"></i> Begin assessment</a></li> -->
           </ul>
         </li>
-			  <li class="treeview">
+		
+		  <li class="treeview">
           <a href="#">
-            <i class="fa fa-users"></i>
-            <span>Students</span>
+            <i class="fa fa-envelope"></i>
+            <span>Email</span>
    
           </a>
-     <ul class="treeview-menu">
-            <li class="active"><a href="students.php"><i class="fa fa-circle-o"></i> View students</a></li>
+          <ul class="treeview-menu">
+            <li><a href="email_config.php"><i class="fa fa-circle-o"></i> Configuration</a></li>
+           
           </ul>
         </li>
 
-
-        
+        <li class="header">SYSTEM</li>
+     	  <li class="treeview">
+          <a href="#">
+            <i class="fa fa-database"></i>
+            <span>Database</span>
+   
+          </a>
+          <ul class="treeview-menu">
+            <li><a <a onclick="return confirm('Are you sure you want to delete all students ?');" href="delete_students.php"><i class="fa fa-circle-o"></i> Delete all students</a></li>
+           <li><a <a onclick="return confirm('Are you sure you want to delete all results ?');" href="delete_results.php"><i class="fa fa-circle-o"></i> Delete all results</a></li>
+          </ul>
+        </li>
 
       </ul>
     </section>

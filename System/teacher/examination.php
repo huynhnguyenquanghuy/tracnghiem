@@ -110,7 +110,7 @@ include 'count_records.php';
 
                 <p>
                   <?php echo"$current_user"; ?>
-                  <small><?php echo"$regid"; ?> , Admin</small>
+                  <small><?php echo"$regid"; ?> , Teacher</small>
                 </p>
               </li>
           
@@ -171,8 +171,8 @@ include 'count_records.php';
       </div>
 
       <ul class="sidebar-menu">
-        <li class="header">MAIN NAVIGATION</li>
-        <li class="treeview" >
+      <li class="header">MAIN NAVIGATION</li>
+        <!-- <li class="treeview" >
           <a href="#">
             <i class="fa fa-user"></i>
             <span>Students</span>
@@ -182,7 +182,7 @@ include 'count_records.php';
             <li><a href="new_student.php"><i class="fa fa-circle-o"></i> Register New Student</a></li>
             <li class="active"><a href="students.php"><i class="fa fa-circle"></i> Customize Students</a></li>
           </ul>
-        </li>
+        </li> -->
         <li>
      	  <li class="treeview active">
           <a href="#">
@@ -192,15 +192,15 @@ include 'count_records.php';
           </a>
    <ul class="treeview-menu">
    <li><a href="results.php"><i class="fa fa-circle-o"></i> Kết Quả</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
-            <li><a href="#"><i class="fa fa-circle-o"></i> Thêm câu hỏi</a></li>
+            <li><a href="new_exam_question.php"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
+            <li><a href="new_examfontend.php"><i class="fa fa-circle-o"></i> Thêm câu hỏi</a></li>
            <li><a href="examination.php"><i class="fa fa-circle-o"></i> Sửa câu hỏi</a></li>
 		       <li><a href="lock_exam.php"><i class="fa fa-circle-o"></i> Khóa bài thi</a></li>
 		        <li><a href="unlock_exam.php"><i class="fa fa-circle-o"></i> Mở khóa bài thi</a></li>
           </ul>
         </li>
 		
-		  <li class="treeview">
+		  <!-- <li class="treeview">
           <a href="#">
             <i class="fa fa-envelope"></i>
             <span>Email</span>
@@ -210,7 +210,7 @@ include 'count_records.php';
             <li><a href="email_config.php"><i class="fa fa-circle-o"></i> Configuration</a></li>
            
           </ul>
-        </li>
+        </li> -->
 
         <li class="header">SYSTEM</li>
      	  <li class="treeview">
