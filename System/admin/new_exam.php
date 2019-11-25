@@ -7,7 +7,7 @@
  $op3 = $_POST['op3'];
  $op4 = $_POST['op4'];
  $ans = $_POST['ans'];
-
+ $dem=0;
 
 include '../db_config/connection.php';
 

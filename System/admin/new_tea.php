@@ -5,30 +5,46 @@ $teaem = $_POST['email'];
 $teaadd = $_POST['address'];
 $teasub = $_POST['Sub'];
 $gender = $_POST['gender'];
-
+$dem=0;
 
 include '../db_config/connection.php';
 
 $sql = "SELECT * FROM user_info";
 $result = $conn->query($sql);
 
-    while($row = $result->fetch_assoc()) 
-	{
-		if($teaem== $row['email'])
-		{
-		header("location:new_teacher.php?msg=Email $teaem is not available");
-		return;
+    while ($row = $result->fetch_array()) 
+		{	if($row['email'] == $teaem)
+			{
+				header("location:new_examfontend.php?err= email da ton tai");
+			}
+			else
+				$dem++;
 		}
-    }
+	$dem++;
 $regdate = date('jS \ F Y h:i:s A');
-$teano = 'TEA:'.rand(1000,9999).'/'.rand(10,99).'/'.rand(0,9).'';
-
+if($dem<10)
+	{
+		$dem="TEA:000$dem";
+	}
+else
+	if($dem<100 and $dem>10)
+	{
+		$dem="TEA:00$dem";
+	}
+	else
+	if($dem<1000 and $dem>100)
+	{
+		$dem="TEA:0$dem";
+	}
+	else
+		$dem="TEA:$dem";
+	
 $sql = "INSERT INTO user_info (user_id, full_name, sub, gender, email, address, role, regdate)
-VALUES ('$teano', '$teaname', N'$teasub', '$gender','$teaem', '$teaadd','Teacher', '$regdate')";
+VALUES ('$dem', '$teaname', N'$teasub', '$gender','$teaem', '$teaadd','Teacher', '$regdate')";
 
 
 if ($conn->query($sql)) {
-    header("location:new_teacher.php?message=$teaname have been registered with ID $teano");
+    header("location:new_teacher.php?message=$teaname have been registered with ID $dem");
 } else {
 	$error = $conn->error;
      header("location:new_teacher.php?err=$error");
