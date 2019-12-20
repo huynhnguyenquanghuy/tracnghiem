@@ -203,11 +203,7 @@ include 'count_records.php';
         </li>
 		
 		  <li class="treeview">
-          <a href="#">
-            <i class="fa fa-envelope"></i>
-            <span>Email</span>
-   
-          </a>
+          
           <ul class="treeview-menu">
             <li><a href="email_config.php"><i class="fa fa-circle-o"></i> Configuration</a></li>
            
