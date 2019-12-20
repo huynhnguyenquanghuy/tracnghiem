@@ -183,11 +183,6 @@ include '../db_config/connection.php';
           </a>
           <ul class="treeview-menu">
             <li><a href="results.php"><i class="fa fa-circle-o"></i> Kết Quả</a></li>
-<<<<<<< HEAD
-            <!-- <li><a href="new_exam_question.php"><i class="fa fa-circle-o"></i>Tạo đề</a></li> -->
-=======
-            <li><a href="new_exam_question.php"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
->>>>>>> 97ba57ce4d0ed582dfbdeae4ab998a41758539d4
             <li><a href="new_examfontend.php"><i class="fa fa-circle-o"></i> Thêm câu hỏi</a></li>
            <li><a href="examination.php"><i class="fa fa-circle-o"></i> Sửa câu hỏi</a></li>
 		       <li><a href="lock_exam.php"><i class="fa fa-circle-o"></i> Khóa bài thi</a></li>
