@@ -192,7 +192,7 @@ include 'count_records.php';
           </a>
    <ul class="treeview-menu">
    <li><a href="results.php"><i class="fa fa-circle-o"></i> Kết Quả</a></li>
-            <li><a href="new_exam_question.php"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
+            <!-- <li><a href="new_exam_question.php"><i class="fa fa-circle-o"></i>Tạo đề</a></li> -->
             <li><a href="new_examfontend.php"><i class="fa fa-circle-o"></i> Thêm câu hỏi</a></li>
            <li><a href="examination.php"><i class="fa fa-circle-o"></i> Sửa câu hỏi</a></li>
 		       <li><a href="lock_exam.php"><i class="fa fa-circle-o"></i> Khóa bài thi</a></li>

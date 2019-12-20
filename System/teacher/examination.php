@@ -110,7 +110,7 @@ include 'count_records.php';
 
                 <p>
                   <?php echo"$current_user"; ?>
-                  <small><?php echo"$regid"; ?> , Teacher</small>
+                  <small><?php echo"$regid"; ?> , Admin</small>
                 </p>
               </li>
           
@@ -172,27 +172,29 @@ include 'count_records.php';
 
       <ul class="sidebar-menu">
       <li class="header">MAIN NAVIGATION</li>
-        <!-- <li class="treeview" >
+        <li class="treeview">
           <a href="#">
             <i class="fa fa-user"></i>
-            <span>Students</span>
+            <span>Students&Teachers</span>
    
           </a>
           <ul class="treeview-menu">
-            <li><a href="new_student.php"><i class="fa fa-circle-o"></i> Register New Student</a></li>
-            <li class="active"><a href="students.php"><i class="fa fa-circle"></i> Customize Students</a></li>
+          <li ><a href="new_student.php"><i class="fa fa-circle-o"></i> Đăng kí học sinh  mới</a></li>
+            <li><a href="students.php"><i class="fa fa-circle-o"></i> Chỉnh sửa học sinh</a></li>
+            <li ><a href="new_teacher.php"><i class="fa fa-circle-o"></i> Đăng kí giáo viên mới</a></li>
+            <li><a href="teacher.php"><i class="fa fa-circle-o"></i> Chỉnh sửa giáo viên</a></li>
           </ul>
-        </li> -->
+        </li>
         <li>
-     	  <li class="treeview active">
+     	  <li class="treeview">
           <a href="#">
             <i class="fa fa-file-text"></i>
             <span>Examination</span>
    
           </a>
-   <ul class="treeview-menu">
-   <li><a href="results.php"><i class="fa fa-circle-o"></i> Kết Quả</a></li>
-            <li><a href="new_exam_question.php"><i class="fa fa-circle-o"></i>Tạo đề</a></li>
+          <ul class="treeview-menu">
+            <li><a href="results.php"><i class="fa fa-circle-o"></i> Kết Quả</a></li>
+            <!-- <li><a href="new_exam_question.php"><i class="fa fa-circle-o"></i>Tạo đề</a></li> -->
             <li><a href="new_examfontend.php"><i class="fa fa-circle-o"></i> Thêm câu hỏi</a></li>
            <li><a href="examination.php"><i class="fa fa-circle-o"></i> Sửa câu hỏi</a></li>
 		       <li><a href="lock_exam.php"><i class="fa fa-circle-o"></i> Khóa bài thi</a></li>
@@ -200,7 +202,7 @@ include 'count_records.php';
           </ul>
         </li>
 		
-		  <!-- <li class="treeview">
+		  <li class="treeview">
           <a href="#">
             <i class="fa fa-envelope"></i>
             <span>Email</span>
@@ -210,7 +212,7 @@ include 'count_records.php';
             <li><a href="email_config.php"><i class="fa fa-circle-o"></i> Configuration</a></li>
            
           </ul>
-        </li> -->
+        </li>
 
         <li class="header">SYSTEM</li>
      	  <li class="treeview">
