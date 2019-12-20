@@ -357,8 +357,7 @@ print '<div class="callout callout-success">
     <div class="pull-right hidden-xs">
       <b>Version</b> 3.0
     </div>
-    <strong>Copyright &copy; <?php echo date('Y'); ?> Developed By <a target="_blank" href="http://facebook.com/narbie1995">Bwire Charles Mashauri</a>.</strong> All rights
-    reserved.
+    <strong>Copyright &copy; <?php echo date('Y'); ?> 
   </footer>
 
 
